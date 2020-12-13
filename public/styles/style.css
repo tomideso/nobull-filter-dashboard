@@ -1,0 +1,102 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
+    height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.tm-background-black{
+    background-color: #000;
+}
+
+.tm-background-none{
+    background-color: transparent;
+}
+
+.tm-primary {
+    color: #fff;
+    background-color: #1e87f0;
+  }
+
+.tm-background-dark{
+    background-color: #FFFFFF00;
+}
+
+.uk-label-muted{
+    background-color: #555 !important;
+    color: #eee !important;
+}
+
+.tm-text-small{
+    font-size: 15px;
+}
+
+.tm-text-smaller{
+    font-size: 12px !important;
+}
+
+.tm-text-muted{
+    color: #555 !important;
+}
+
+.tm-text-white{
+    color: #fff;
+}
+
+.tm-background-white{
+    background-color: #fff!important;
+}
+
+.tm-height-small{
+    height: 180px;
+}
+
+.tm-padding-small{
+    padding:6px 15px;
+}
+
+.tm-outline-muted{
+    border: 1px solid #e5e5e5 !important;
+}
+
+.tm-outline-white{
+    border: 1px solid #fff !important;
+}
+
+.tm-outline-primary{
+    border: 1px solid #1e87f0 !important;
+    background-color: #fff !important;
+}
+
+.tm-table-stripe{
+    margin-top: 5px!important;
+}
+.tm-table-stripe tr{
+    border:1px solid #e5e5e5;
+}
+
+.pointer-none{
+    pointer-events: none;
+}
+
+@media (min-width: 960px) {
+    .tm-table-stripe>*>tr>*:not(:last-child){
+        border-right:1px solid #e5e5e5;
+    }
+
+    .tm-table-stripe *>td{
+        text-align: left;
+    }
+
+    .tm-table-stripe *>th{
+        text-align: left!important;
+    }
+    
+}
