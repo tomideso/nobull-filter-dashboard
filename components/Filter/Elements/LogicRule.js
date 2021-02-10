@@ -1,53 +1,54 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import RadioGroup, {
   RadioInput,
 } from "@/custom components/RadioGroup/RadioGroup";
-import { getRandomNumber } from "utility/helpers";
 import Guide from "./Guide";
 import DropConfirmation from "./DropConfirmation";
+import { CollectionContext } from "components/context/Collection";
 
-const LogicRule = ({}) => {
-  const [logicOperator, setLogicOperator] = useState("And");
+const LogicRule = ({
+  rules,
+  values,
+  setValues,
+  errors,
+  touched,
+  namePrefix,
+  elementIdx,
+}) => {
+  const { collection } = useContext(CollectionContext);
 
-  const [guide, setguide] = useState([]);
-  const guideRef = useRef([]);
+  const [joiner, setLogicOperator] = useState("And");
 
-  useEffect(() => {
-    guideRef.current = guide;
-  }, [guide]);
-
-  const addGuide = () => {
-    if (!guide.length) {
-      setguide([
-        {
-          operator: "contain",
-          value: "",
-          joiner: "",
-        },
-      ]);
-      return;
-    }
-    setguide((g) => [
-      ...g,
-      {
-        operator: "not_contain",
-        value: "",
-        joiner: logicOperator,
-      },
-    ]);
-  };
-
-  const deleteGuide = (idx) => {
-    setguide((g) => g.filter((v, i) => idx != i));
+  const logic = {
+    operator: "contain",
+    value: "",
+    joiner,
+    field: collection?.fields[0]?.slug,
   };
 
   const emptyGuide = () => {
-    setguide([]);
+    const elements = [...values.elements];
+    elements[elementIdx].logicRules = [];
+    setValues({ ...values, elements });
+  };
+
+  const deleteRule = (idx) => {
+    const elements = [...values.elements];
+    elements[elementIdx].logicRules = elements[elementIdx].logicRules.filter(
+      (v, i) => i != idx
+    );
+    setValues({ ...values, elements });
+  };
+
+  const addRule = () => {
+    const elements = [...values.elements];
+    elements[elementIdx].logicRules.push(logic);
+    setValues({ ...values, elements });
   };
 
   return (
     <div className="uk-card  tm-background-dark">
-      {!!guide.length && (
+      {!!rules.length && (
         <>
           <div className="uk-card-header uk-label-muted card-padding  uk-flex uk-flex-middle uk-flex-between">
             <div className="uk-text-bold">Logic rule</div>
@@ -62,15 +63,21 @@ const LogicRule = ({}) => {
             </div>
           </div>
           <div className="uk-padding-small">
-            {guide.map((val, idx) => {
+            {rules.map((val, idx) => {
+              const Errors =
+                (errors?.logicRules?.length && errors.logicRules[idx]) || {};
+              const Touched =
+                (touched?.logicRules?.length && touched.logicRules[idx]) || {};
+
+              const hasError = Errors.value && Touched.value;
               return (
                 <Guide
-                  key={getRandomNumber(5)}
-                  deleteHandler={() => deleteGuide(idx)}
+                  key={namePrefix + idx}
+                  deleteHandler={() => deleteRule(idx)}
                   {...val}
-                  setguide={setguide}
-                  guideRef={guideRef}
                   idx={idx}
+                  hasError={hasError}
+                  name={`${namePrefix}logicRules.${idx}.`}
                 />
               );
             })}
@@ -79,22 +86,22 @@ const LogicRule = ({}) => {
             <RadioGroup>
               <RadioInput
                 label="&nbsp;And&nbsp;"
-                name="operator"
+                name={`${namePrefix}-operator`}
                 value="Male"
-                checked={logicOperator === "And"}
+                checked={joiner === "And"}
                 onChange={() => setLogicOperator("And")}
               />
               <RadioInput
                 label="&nbsp;OR&nbsp;"
-                name="operator"
+                name={`${namePrefix}-operator`}
                 value="Female"
-                checked={logicOperator === "Or"}
+                checked={joiner === "Or"}
                 onChange={() => setLogicOperator("Or")}
               />
             </RadioGroup>
             &nbsp;&nbsp;
             <span
-              onClick={addGuide}
+              onClick={addRule}
               className="uk-button uk-button-link uk-text-capitalize tm-text-primary">
               <span className="uk-icon" uk-icon="icon: plus-circle;"></span> Add
               Condition
@@ -103,11 +110,11 @@ const LogicRule = ({}) => {
         </>
       )}
       <div className="uk-card-footer card-padding uk-label-muted">
-        {!!guide.length ? (
+        {!!rules.length ? (
           <span>&nbsp;</span>
         ) : (
           <span
-            onClick={addGuide}
+            onClick={addRule}
             className="uk-button uk-button-small uk-text-capitalize tm-primary uk-text-bold">
             <i className="fa fa-plus "></i>
             Add logic rule

@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./pages/_error.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -116,17 +116,6 @@ eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/he
 
 /***/ }),
 
-/***/ "./node_modules/next/error.js":
-/*!************************************!*\
-  !*** ./node_modules/next/error.js ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("module.exports = __webpack_require__(/*! ./dist/pages/_error */ \"./node_modules/next/dist/pages/_error.js\")\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9ub2RlX21vZHVsZXMvbmV4dC9lcnJvci5qcz83YTg5Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGlCQUFpQixtQkFBTyxDQUFDLHFFQUFxQiIsImZpbGUiOiIuL25vZGVfbW9kdWxlcy9uZXh0L2Vycm9yLmpzLmpzIiwic291cmNlc0NvbnRlbnQiOlsibW9kdWxlLmV4cG9ydHMgPSByZXF1aXJlKCcuL2Rpc3QvcGFnZXMvX2Vycm9yJylcbiJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./node_modules/next/error.js\n");
-
-/***/ }),
-
 /***/ "./node_modules/next/node_modules/@babel/runtime/helpers/interopRequireDefault.js":
 /*!****************************************************************************************!*\
   !*** ./node_modules/next/node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
@@ -138,26 +127,15 @@ eval("function _interopRequireDefault(obj) {\n  return obj && obj.__esModule ? o
 
 /***/ }),
 
-/***/ "./pages/_error.js":
-/*!*************************!*\
-  !*** ./pages/_error.js ***!
-  \*************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var next_error__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/error */ \"./node_modules/next/error.js\");\n/* harmony import */ var next_error__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_error__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/router */ \"next/router\");\n/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_1__);\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (next_error__WEBPACK_IMPORTED_MODULE_0___default.a);\n\nnext_error__WEBPACK_IMPORTED_MODULE_0___default.a.getInitialProps = ({\n  res,\n  err,\n  asPath\n}) => {\n  const statusCode = res ? res.statusCode : err ? err.statusCode : 404;\n\n  if (statusCode && statusCode === 404) {\n    if (asPath.match(/\\/$/)) {\n      const withoutTrailingSlash = asPath.substr(0, asPath.length - 1);\n\n      if (res) {\n        res.writeHead(302, {\n          Location: withoutTrailingSlash\n        });\n        res.end();\n      } else {\n        next_router__WEBPACK_IMPORTED_MODULE_1___default.a.push(withoutTrailingSlash);\n      }\n    }\n  }\n\n  return {\n    statusCode\n  };\n}; // add this to nginx\n// rewrite ^(.+)/+$ $1 permanent;\n// MyError.getInitialProps = async ({ res, err, asPath }) => {\n//     // Capture 404 of pages with traling slash and redirect them\n//     const statusCode = res \n//       ? res.statusCode\n//       : (err ? err.statusCode : 404);\n//     if (statusCode && statusCode === 404) {\n//       const [path, query = ''] = asPath.split('?');                                                                                                                                                                                             \n//       if (path.match(/\\/$/)) {\n//         const withoutTrailingSlash = path.substr(0, path.length - 1); \n//         if (res) {\n//           res.writeHead(302, {\n//             Location: `${withoutTrailingSlash}${query ? `?${query}` : ''}`,\n//           }); \n//           res.end();\n//         } else {\n//           Router.push(`${withoutTrailingSlash}${query ? `?${query}` : ''}`);\n//         }   \n//       }   \n//     }//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9wYWdlcy9fZXJyb3IuanM/NjM0MyJdLCJuYW1lcyI6WyJFcnJvciIsImdldEluaXRpYWxQcm9wcyIsInJlcyIsImVyciIsImFzUGF0aCIsInN0YXR1c0NvZGUiLCJtYXRjaCIsIndpdGhvdXRUcmFpbGluZ1NsYXNoIiwic3Vic3RyIiwibGVuZ3RoIiwid3JpdGVIZWFkIiwiTG9jYXRpb24iLCJlbmQiLCJSb3V0ZXIiLCJwdXNoIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFDQTtBQUVlQSxnSEFBZjs7QUFFQUEsaURBQUssQ0FBQ0MsZUFBTixHQUF3QixDQUFDO0FBQUVDLEtBQUY7QUFBT0MsS0FBUDtBQUFZQztBQUFaLENBQUQsS0FBMEI7QUFDaEQsUUFBTUMsVUFBVSxHQUFHSCxHQUFHLEdBQUdBLEdBQUcsQ0FBQ0csVUFBUCxHQUFvQkYsR0FBRyxHQUFHQSxHQUFHLENBQUNFLFVBQVAsR0FBb0IsR0FBakU7O0FBRUEsTUFBSUEsVUFBVSxJQUFJQSxVQUFVLEtBQUssR0FBakMsRUFBc0M7QUFDcEMsUUFBSUQsTUFBTSxDQUFDRSxLQUFQLENBQWEsS0FBYixDQUFKLEVBQXlCO0FBQ3ZCLFlBQU1DLG9CQUFvQixHQUFHSCxNQUFNLENBQUNJLE1BQVAsQ0FBYyxDQUFkLEVBQWlCSixNQUFNLENBQUNLLE1BQVAsR0FBZ0IsQ0FBakMsQ0FBN0I7O0FBQ0EsVUFBSVAsR0FBSixFQUFTO0FBQ1BBLFdBQUcsQ0FBQ1EsU0FBSixDQUFjLEdBQWQsRUFBbUI7QUFDakJDLGtCQUFRLEVBQUVKO0FBRE8sU0FBbkI7QUFHQUwsV0FBRyxDQUFDVSxHQUFKO0FBQ0QsT0FMRCxNQUtPO0FBQ0xDLDBEQUFNLENBQUNDLElBQVAsQ0FBWVAsb0JBQVo7QUFDRDtBQUNGO0FBQ0Y7O0FBRUQsU0FBTztBQUFFRjtBQUFGLEdBQVA7QUFDRCxDQWxCRCxDLENBcUJBO0FBQ0E7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSIsImZpbGUiOiIuL3BhZ2VzL19lcnJvci5qcy5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBFcnJvciBmcm9tIFwibmV4dC9lcnJvclwiO1xuaW1wb3J0IFJvdXRlciBmcm9tIFwibmV4dC9yb3V0ZXJcIjtcblxuZXhwb3J0IGRlZmF1bHQgRXJyb3I7XG5cbkVycm9yLmdldEluaXRpYWxQcm9wcyA9ICh7IHJlcywgZXJyLCBhc1BhdGggfSkgPT4ge1xuICBjb25zdCBzdGF0dXNDb2RlID0gcmVzID8gcmVzLnN0YXR1c0NvZGUgOiBlcnIgPyBlcnIuc3RhdHVzQ29kZSA6IDQwNDtcblxuICBpZiAoc3RhdHVzQ29kZSAmJiBzdGF0dXNDb2RlID09PSA0MDQpIHtcbiAgICBpZiAoYXNQYXRoLm1hdGNoKC9cXC8kLykpIHtcbiAgICAgIGNvbnN0IHdpdGhvdXRUcmFpbGluZ1NsYXNoID0gYXNQYXRoLnN1YnN0cigwLCBhc1BhdGgubGVuZ3RoIC0gMSk7XG4gICAgICBpZiAocmVzKSB7XG4gICAgICAgIHJlcy53cml0ZUhlYWQoMzAyLCB7XG4gICAgICAgICAgTG9jYXRpb246IHdpdGhvdXRUcmFpbGluZ1NsYXNoXG4gICAgICAgIH0pO1xuICAgICAgICByZXMuZW5kKCk7XG4gICAgICB9IGVsc2Uge1xuICAgICAgICBSb3V0ZXIucHVzaCh3aXRob3V0VHJhaWxpbmdTbGFzaCk7XG4gICAgICB9XG4gICAgfVxuICB9XG5cbiAgcmV0dXJuIHsgc3RhdHVzQ29kZSB9O1xufTtcblxuXG4vLyBhZGQgdGhpcyB0byBuZ2lueFxuLy8gcmV3cml0ZSBeKC4rKS8rJCAkMSBwZXJtYW5lbnQ7XG5cbi8vIE15RXJyb3IuZ2V0SW5pdGlhbFByb3BzID0gYXN5bmMgKHsgcmVzLCBlcnIsIGFzUGF0aCB9KSA9PiB7XG4vLyAgICAgLy8gQ2FwdHVyZSA0MDQgb2YgcGFnZXMgd2l0aCB0cmFsaW5nIHNsYXNoIGFuZCByZWRpcmVjdCB0aGVtXG4vLyAgICAgY29uc3Qgc3RhdHVzQ29kZSA9IHJlcyBcbi8vICAgICAgID8gcmVzLnN0YXR1c0NvZGVcbi8vICAgICAgIDogKGVyciA/IGVyci5zdGF0dXNDb2RlIDogNDA0KTtcbiAgXG4vLyAgICAgaWYgKHN0YXR1c0NvZGUgJiYgc3RhdHVzQ29kZSA9PT0gNDA0KSB7XG4vLyAgICAgICBjb25zdCBbcGF0aCwgcXVlcnkgPSAnJ10gPSBhc1BhdGguc3BsaXQoJz8nKTsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbi8vICAgICAgIGlmIChwYXRoLm1hdGNoKC9cXC8kLykpIHtcbi8vICAgICAgICAgY29uc3Qgd2l0aG91dFRyYWlsaW5nU2xhc2ggPSBwYXRoLnN1YnN0cigwLCBwYXRoLmxlbmd0aCAtIDEpOyBcbi8vICAgICAgICAgaWYgKHJlcykge1xuLy8gICAgICAgICAgIHJlcy53cml0ZUhlYWQoMzAyLCB7XG4vLyAgICAgICAgICAgICBMb2NhdGlvbjogYCR7d2l0aG91dFRyYWlsaW5nU2xhc2h9JHtxdWVyeSA/IGA/JHtxdWVyeX1gIDogJyd9YCxcbi8vICAgICAgICAgICB9KTsgXG4vLyAgICAgICAgICAgcmVzLmVuZCgpO1xuLy8gICAgICAgICB9IGVsc2Uge1xuLy8gICAgICAgICAgIFJvdXRlci5wdXNoKGAke3dpdGhvdXRUcmFpbGluZ1NsYXNofSR7cXVlcnkgPyBgPyR7cXVlcnl9YCA6ICcnfWApO1xuLy8gICAgICAgICB9ICAgXG4vLyAgICAgICB9ICAgXG4vLyAgICAgfSJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./pages/_error.js\n");
-
-/***/ }),
-
-/***/ "next/router":
-/*!******************************!*\
-  !*** external "next/router" ***!
-  \******************************/
+/***/ 1:
+/*!************************************!*\
+  !*** multi next/dist/pages/_error ***!
+  \************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = require(\"next/router\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vZXh0ZXJuYWwgXCJuZXh0L3JvdXRlclwiP2Q4M2UiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEiLCJmaWxlIjoibmV4dC9yb3V0ZXIuanMiLCJzb3VyY2VzQ29udGVudCI6WyJtb2R1bGUuZXhwb3J0cyA9IHJlcXVpcmUoXCJuZXh0L3JvdXRlclwiKTsiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///next/router\n");
+module.exports = __webpack_require__(/*! next/dist/pages/_error */"./node_modules/next/dist/pages/_error.js");
+
 
 /***/ }),
 

@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Container from "../Elements/Container";
 import * as Yup from "yup";
 import { withFormik, Form, Field } from "formik";
-import { getRandomNumber } from "utility/helpers";
+import { getRandomNumber, warningAlert } from "utility/helpers";
+import DropConfirmation from "../Elements/DropConfirmation";
 
-const Config = ({ values }) => {
+const Config = ({ values, errors, touched, setValues, resetForm }) => {
+  const closeHandler = () => {
+    window.UIkit.offcanvas("#offcanvas-usage").hide();
+  };
+
+  const modalRef = useRef();
+
+  // console.log(values);
   return (
     <>
       {/* <div className="uk-offcanvas-flip">
@@ -15,8 +23,9 @@ const Config = ({ values }) => {
       <div>
         <div
           id="offcanvas-usage"
-          uk-offcanvas="overlay: true;flip: true;"
-          className="uk-offcanvas ">
+          uk-offcanvas="overlay: true;flip: true; bg-close:false; esc-close:false"
+          className="uk-offcanvas "
+          ref={modalRef}>
           <div className="uk-offcanvas-bar uk-width-1-2@m border-left uk-padding-remove">
             <span
               style={{ height: "26px", width: "26px" }}
@@ -28,13 +37,22 @@ const Config = ({ values }) => {
                   Filter group details
                 </div>
                 <div>
-                  <button className="uk-button uk-button-primary uk-text-capitalize  uk-button-small">
+                  <button
+                    type="submit"
+                    className="uk-button uk-button-primary uk-text-capitalize  uk-button-small">
                     Save
                   </button>
                   &nbsp;
-                  <button className="uk-button uk-text-capitalize uk-button-default uk-button-small ">
+                  <button
+                    type="button"
+                    className="uk-button uk-text-capitalize uk-button-default uk-button-small">
                     Cancel
                   </button>
+                  <DropConfirmation
+                    message="You will lose all unsaved settings"
+                    proceedText="Cancel"
+                    initDelete={closeHandler}
+                  />
                 </div>
               </div>
 
@@ -44,48 +62,19 @@ const Config = ({ values }) => {
                     Filter group name *
                   </div>
                   <Field
-                    className="uk-input bg-none uk-text-bold"
+                    className={[
+                      "uk-input bg-none uk-text-bold",
+                      errors.name && touched.name
+                        ? "tm-form-danger uk-animation-shake"
+                        : "",
+                    ].join(" ")}
+                    autoComplete="false"
                     name="name"
                   />
                 </div>
                 <div
                   className="uk-grid uk-grid-stack uk-grid-small uk-child-width-1-2@m"
                   uk-grid="">
-                  <div
-                    className={
-                      values.filterOption != "text" ? "" : "uk-width-1-1"
-                    }>
-                    <div className="uk-text-capitalize uk-text-bold uk-text-truncate tm-text-white">
-                      Wrapper Class *{" "}
-                    </div>
-                    <Field
-                      className="uk-input bg-none uk-text-bold pointer-none"
-                      name="wrapperClass"
-                      readOnly={true}
-                    />
-                    <div className="uk-text-small uk-text-truncate tm-text-white uk-text-danger">
-                      Include class in the wrapper div of this group
-                    </div>
-                  </div>
-                  {values.filterOption != "text" && (
-                    <div className="">
-                      <div>
-                        <span className="uk-text-capitalize uk-text-bold uk-text-truncate">
-                          Target Field Class *
-                        </span>
-                        <span
-                          className="uk-icon uk-text-primary uk-link"
-                          uk-icon="icon: info;"
-                          uk-tooltip="Div class to search in for value."></span>
-                      </div>
-                      <Field
-                        className="uk-input bg-none uk-text-bold pointer-none"
-                        name="targetField"
-                        readOnly={true}
-                      />
-                      <div className="uk-text-small uk-text-truncate tm-text-white uk-text-danger"></div>
-                    </div>
-                  )}
                   <div>
                     <div className="uk-text-capitalize uk-text-bold uk-text-truncate tm-text-white">
                       Filter Type *
@@ -112,14 +101,58 @@ const Config = ({ values }) => {
                       <option value="text">Text</option>
                     </Field>
                   </div>
+                  <div
+                    className={
+                      values.filterOption != "text" ? "" : "uk-width-1-1"
+                    }>
+                    <div className="uk-text-capitalize uk-text-bold uk-text-truncate tm-text-white">
+                      Wrapper Class *{" "}
+                    </div>
+                    <Field
+                      className="uk-input bg-none uk-text-bold pointer-none"
+                      name="wrapperClass"
+                    />
+                    <div className="uk-text-small uk-text-truncate tm-text-white uk-text-danger">
+                      Include class in the wrapper div of this group
+                    </div>
+                  </div>
+                  {values.filterOption != "text" && (
+                    <div className="">
+                      <div>
+                        <span className="uk-text-capitalize uk-text-bold uk-text-truncate">
+                          Target Field Class *
+                        </span>
+                        <span
+                          className="uk-icon uk-text-primary uk-link"
+                          uk-icon="icon: info;"
+                          uk-tooltip="Div class to search in for value."></span>
+                      </div>
+                      <Field
+                        className={[
+                          "uk-input bg-none uk-text-bold",
+                          errors.targetField && touched.targetField
+                            ? "tm-form-danger uk-animation-shake"
+                            : "",
+                        ].join(" ")}
+                        name="targetField"
+                      />
+                      <div className="uk-text-small uk-text-truncate tm-text-white uk-text-danger"></div>
+                    </div>
+                  )}
                 </div>
               </div>
 
-              <Container filterOption={values.filterOption} />
+              <Container
+                values={values}
+                touched={touched}
+                errors={errors}
+                setValues={setValues}
+              />
             </Form>
           </div>
         </div>
       </div>
+      )
       <style jsx>{`
         .border-left {
           border-left: 2px solid black;
@@ -141,22 +174,50 @@ const FormikConfig = withFormik({
     name,
     wrapperClass,
     targetField,
+    elements,
   }) {
     return {
       filterOption: filterOption || "text",
       filterType: filterType || "exclusive",
       name: name || "",
-      targetField: targetField || "text",
+      targetField: targetField || "",
       wrapperClass: wrapperClass || getRandomClassName(),
+      elements: elements || [],
     };
   },
   validationSchema: Yup.object().shape({
     filterOption: Yup.string().required(),
     filterType: Yup.string().required(),
     name: Yup.string().required(),
+    targetField: Yup.string().when("filterOption", (val, schema) => {
+      return !/text/.test(val)
+        ? Yup.string()
+            .test(
+              "len",
+              "TargetField classname is required",
+              (val) => val && val.length >= 2
+            )
+            .required()
+        : Yup.string();
+    }),
+    elements: Yup.array().of(
+      Yup.object().shape({
+        trigger: Yup.string().required("trigger is required"),
+        filterBy: Yup.string().required("filterBy is required"),
+        logicRules: Yup.array().of(
+          Yup.object().shape({
+            field: Yup.string().required("field is required"),
+            joiner: Yup.string().required("trigger is required"),
+            operator: Yup.string().required("trigger is required"),
+            value: Yup.string().required("value is required"),
+          })
+        ),
+      })
+    ),
   }),
   handleSubmit(values, { props, resetForm, setErrors, setSubmitting }) {
-    console.log(values);
+    props.updateGroup(values, props.activeGroupIdx);
+    warningAlert({ message: "configuration saved", status: "success" });
   },
 })(Config);
 

@@ -1,15 +1,23 @@
 import React, { useRef } from "react";
 
-const DropConfirmation = ({ initDelete }) => {
+const DropConfirmation = ({ initDelete, proceedText = "Delete", message }) => {
   const ref = useRef();
 
+  const onDelete = () => {
+    initDelete();
+    window.UIkit.drop(ref.current).hide(0);
+  };
   return (
     <div ref={ref} uk-drop="mode: click;offset:10; pos: top-right">
       <div className="fit-content uk-padding-small tm-background-black tm-text-white ">
         <div className="uk-margin-small-bottom">
-          This action can't be undone.
-          <br />
-          Delete it anyway?
+          {message || (
+            <>
+              This action can't be undone.
+              <br />
+              Delete it anyway?
+            </>
+          )}
         </div>
 
         <div className="uk-flex uk-flex-between ">
@@ -23,8 +31,8 @@ const DropConfirmation = ({ initDelete }) => {
           <span
             className="uk-button uk-button-danger uk-button-small uk-text-capitalize uk-float-right"
             type="button"
-            onClick={initDelete}>
-            Delete
+            onClick={onDelete}>
+            {proceedText}
           </span>
         </div>
       </div>

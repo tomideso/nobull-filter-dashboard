@@ -12,8 +12,17 @@ body {
   box-sizing: border-box;
 }
 
+.tm-cursor-pointer{
+    cursor: pointer;
+}
+
 .tm-background-black{
     background-color: #000;
+}
+
+.tm-background-danger {
+    color: #fff;
+    background: rgb(240, 80, 110);
 }
 
 .tm-background-none{
@@ -100,3 +109,10 @@ body {
     }
     
 }
+
+.tm-form-danger,
+.tm-form-danger:focus {
+    color: rgb(240, 80, 110) !important;
+    border-color: rgb(240, 80, 110) !important;
+}
+

@@ -50,3 +50,13 @@ export const queryString = (obj) =>
   Object.keys(obj)
     .map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`)
     .join("&");
+
+export const warningAlert = ({
+  message = "You're all caught up.",
+  status = "danger",
+}) => {
+  window.UIkit.notification({
+    message: `<div class='uk-text-center uk-text-small'>${message}</div>`,
+    status,
+  });
+};

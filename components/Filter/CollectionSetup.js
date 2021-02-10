@@ -1,6 +1,50 @@
-import React from "react";
+import React, { useContext } from "react";
+// import Select from "react-select";
 
-const CollectionSetup = () => {
+import dynamic from "next/dynamic";
+import { CollectionContext } from "components/context/Collection";
+const Select = dynamic(() => import("react-select"), {
+  ssr: false,
+});
+
+const CollectionSetup = ({
+  addGroup,
+  groups,
+  setActiveGroup,
+  setActiveGroupIdx,
+  saveConfiguration,
+  sites,
+  sitesChangeHandler,
+  selectedSite,
+  collectionChangeHandler,
+}) => {
+  const parseOptions = () => {
+    return sites.reduce((curr, val) => {
+      const { name: label, previewUrl, shortName, _id } = val;
+
+      curr.push({ label, value: _id });
+      return curr;
+    }, []);
+  };
+
+  const options = parseOptions();
+
+  const { isLoading, collections = [], selectedCollection } = useContext(
+    CollectionContext
+  );
+
+  const parseCollections = () => {
+    return collections.reduce((curr, val) => {
+      const { name: label, slug, singularName, _id } = val;
+
+      curr.push({ label, value: _id });
+
+      return curr;
+    }, []);
+  };
+
+  const collectionOptions = parseCollections();
+
   return (
     <>
       <div
@@ -12,10 +56,16 @@ const CollectionSetup = () => {
               <div className="uk-text-capitalize uk-text-bold uk-text-truncate tm-text-white">
                 Select Webflow site
               </div>
-              <select className="uk-select bg-none uk-text-bold">
-                <option>Finsweet.com</option>
-                <option>cmslibraary</option>
-              </select>
+              <Select
+                name="sites"
+                value={options.find(({ value }) => value == selectedSite)}
+                // onFocus={loadService}
+                autoload={false}
+                options={options}
+                onChange={sitesChangeHandler}
+                id="sites-dropdown"
+                className="bg-none uk-text-bold"
+              />
             </div>
           </li>
 
@@ -25,10 +75,17 @@ const CollectionSetup = () => {
               <div className="uk-text-capitalize uk-text-bold uk-text-truncate tm-text-white">
                 Select Webflow Collection
               </div>
-              <select className="uk-select bg-none uk-text-bold">
-                <option>Porfolio</option>
-                <option>cmslibraary</option>
-              </select>
+              <Select
+                name="collections"
+                value={collectionOptions?.find(
+                  ({ value }) => value == selectedCollection
+                )}
+                autoload={false}
+                isLoading={isLoading}
+                options={collectionOptions}
+                onChange={collectionChangeHandler}
+                className="bg-none uk-text-bold"
+              />
             </div>
           </li>
           <li className="divider "></li>
@@ -41,6 +98,7 @@ const CollectionSetup = () => {
 
               <a
                 className="uk-link-reset uk-text-bold white uk-button uk-button-primary uk-button-small "
+                onClick={addGroup}
                 uk-toggle="#offcanvas-usage">
                 <span
                   className="uk-icon"
@@ -49,7 +107,45 @@ const CollectionSetup = () => {
               </a>
             </div>
           </li>
+          {groups.map(({ name, element }, idx) => {
+            return (
+              <React.Fragment key={`group-${idx}`}>
+                <li
+                  className="uk-background-secondary uk-padding-small tm-cursor-pointer"
+                  uk-toggle="#offcanvas-usage"
+                  onClick={() => {
+                    setActiveGroup(groups[idx]);
+                    setActiveGroupIdx(idx);
+                  }}>
+                  <strong className="uk-text-capitalize uk-text-truncate tm-text-white uk-margin-small-right">
+                    {name || "Not specified"}
+                  </strong>
+                </li>
+                <li className="divider "></li>
+              </React.Fragment>
+            );
+          })}
         </ul>
+
+        <div className="tm-text-white uk-padding-small">
+          <div
+            className="uk-text-lead tm-text-white"
+            style={{ color: "white" }}>
+            Publish and test
+          </div>
+          <div className="">
+            When data attributes are added to Webflow site,
+          </div>
+          <div className="">publish your site and push the button</div>
+
+          <div>
+            <button
+              onClick={saveConfiguration}
+              className="uk-button uk-button-primary">
+              save
+            </button>
+          </div>
+        </div>
       </div>
 
       <style jsx>{`
@@ -61,8 +157,9 @@ const CollectionSetup = () => {
           color: white !important;
         }
 
-        .bg-none {
-          background: transparent;
+        .bg-none,
+        .bg-none > div {
+          background: transparent !important;
           color: #fff;
         }
       `}</style>

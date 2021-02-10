@@ -1,22 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import Element from "./Element";
-import { getRandomNumber } from "utility/helpers";
+import { FieldArray } from "formik";
 
-const element = {
-  trigger: "",
-  filterBy: "",
-  logicRules: [],
-};
-
-const Container = ({ filterOption }) => {
-  const [elements, setElements] = useState([]);
-
+const Container = ({ values, errors, touched, setValues }) => {
   const deleteElement = (idx) => {
-    setElements((g) => g.filter((v, i) => i != idx));
+    const elements = values.elements.filter((v, i) => i != idx);
+    setValues({ ...values, elements });
   };
+
   const addElement = () => {
-    setElements((g) => [{ ...element }, ...g]);
+    const element = {
+      trigger: "Static Div, Button, Link",
+      filterBy: "",
+      logicRules: [],
+    };
+    const elements = values.elements.slice();
+    elements.unshift(element);
+
+    setValues({ ...values, elements });
   };
+
   return (
     <>
       <div className="tm-background-black uk-padding-small">
@@ -34,15 +37,23 @@ const Container = ({ filterOption }) => {
 
       <div className="uk-padding-small">
         <ul className="uk-accordion" uk-accordion="">
-          {elements.map((val, idx) => {
-            return (
-              <Element
-                key={getRandomNumber(10)}
-                {...val}
-                deleteElement={() => deleteElement(idx)}
-              />
-            );
-          })}
+          <FieldArray name="elements">
+            {() =>
+              values.elements.map((element, i) => {
+                return (
+                  <Element
+                    key={"element" + i}
+                    idx={i}
+                    deleteElement={() => deleteElement(i)}
+                    values={values}
+                    errors={errors}
+                    touched={touched}
+                    setValues={setValues}
+                  />
+                );
+              })
+            }
+          </FieldArray>
         </ul>
       </div>
       <style jsx>{`

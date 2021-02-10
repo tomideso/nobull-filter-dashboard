@@ -1,57 +1,126 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { numberInputHandler } from "utility/helpers";
 import LogicRule from "./LogicRule";
 import DropConfirmation from "./DropConfirmation";
+import { Field } from "formik";
 
-const Element = ({ type = "text", deleteElement }) => {
-  const [state, setstate] = useState();
-  const onInput = { onInput: type == "number" ? numberInputHandler : null };
+const Element = ({
+  trigger,
+  filterBy,
+  deleteElement,
+  idx,
+  values,
+  errors,
+  touched,
+  setValues,
+}) => {
+  const identifier = idx;
+
+  const [show, setShow] = useState(false);
+  const ref = useRef();
+
+  useEffect(() => {
+    UIkit.util.on(ref.current, "hide", function () {
+      setShow(false);
+    });
+    UIkit.util.on(ref.current, "show", function () {
+      setShow(true);
+    });
+  }, []);
+
+  const element = values.elements[idx];
+  const namePrefix = `elements.${idx}.`;
+
+  const Errors = (errors.elements?.length && errors.elements[idx]) || {};
+  const Touched = (touched.elements?.length && touched.elements[idx]) || {};
+
+  const hasError = Errors.filterBy && Touched.filterBy;
+
+  const logicRuleError = !!Errors.logicRules?.length || hasError;
 
   return (
     <>
-      <li>
-        <a className="uk-accordion-title" href="#">
-          Item 1
-        </a>
-        <a className="uk-accordion-title uk-text-small edit" href="#">
-          Edit Filter
-        </a>
-        <div className="info">dsfs</div>
-
+      <li ref={ref}>
+        {show ? (
+          <a className="uk-accordion-title uk-text-small edit" href="#">
+            Edit Filter
+          </a>
+        ) : (
+          <a className="uk-accordion-title uk-clearfix " href="#">
+            <div className="uk-flex uk-flex-between">
+              <span className="uk-button uk-button-small uk-label-warning">
+                {element.trigger}
+              </span>
+              {logicRuleError ? (
+                <span
+                  className="uk-badge  uk-text-small uk-float-right uk-text-bold"
+                  style={{ background: "rgb(240, 80, 110)", color: "#fff" }}>
+                  !
+                </span>
+              ) : (
+                ""
+              )}
+            </div>
+          </a>
+        )}
+        <div className="info">{element.filterBy}</div>
         <div className="uk-accordion-content" hidden="1">
           <div
             className="uk-grid-small uk-grid uk-grid-stack uk-child-width-1-2@m"
             uk-grid="">
             <div>
-              <label className="uk-form-label" htmlFor="filterTrigger">
+              <label
+                className="uk-form-label"
+                htmlFor={"filterTrigger-" + identifier}>
                 Filter Trigger*
               </label>
 
-              <select
+              <Field
                 className="uk-select"
-                id="filterTrigger"
-                defaultValue="Static Div, Button, Link">
+                component="select"
+                name={`${namePrefix}trigger`}
+                id={"filterTrigger-" + identifier}
+                defaultValue={trigger}>
                 <option value="CMS Collection List">CMS Collection List</option>
                 <option value="Static Div, Button, Link">
                   Static Div, Button, Link
                 </option>
-              </select>
+              </Field>
             </div>
             <div>
-              <label className="uk-form-label" htmlFor="filterBy">
+              <label
+                className="uk-form-label"
+                htmlFor={"filterBy-" + identifier}>
                 filter-by*
               </label>
-              <input
-                className="uk-input"
-                id="filterBy"
-                type="text"
-                name="filterBy"
-                {...onInput}
-              />
+              <div className="uk-inline uk-width-1-1">
+                <span
+                  className="uk-form-icon uk-form-icon-flip"
+                  uk-icon="icon: info"
+                  uk-tooltip="Must match filter-by attribute of the current button"></span>
+                <Field
+                  className={[
+                    "uk-input uk-width-1-1",
+                    hasError ? "tm-form-danger uk-animation-shake" : " ",
+                  ].join(" ")}
+                  id={"filterBy-" + identifier}
+                  type="text"
+                  defaultValue={filterBy}
+                  name={`${namePrefix}filterBy`}
+                />
+              </div>
             </div>
           </div>
           <div className="uk-margin-small-top">
-            <LogicRule />
+            <LogicRule
+              rules={element.logicRules}
+              values={values}
+              errors={Errors}
+              touched={Touched}
+              elementIdx={idx}
+              setValues={setValues}
+              namePrefix={namePrefix}
+            />
           </div>
           <div className="uk-margin-small-top">
             <span

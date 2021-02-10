@@ -23,8 +23,14 @@ export const RadioInput = ({
 }) => {
   return (
     <span className="RadioGroup">
-      <input type="radio" id={`option-${props.label}`} {...props} />
-      <label htmlFor={`option-${props.label}`}>{props.label}</label>
+      <input
+        type="radio"
+        id={`option-${props.label}-${props.name}`}
+        {...props}
+      />
+      <label htmlFor={`option-${props.label}-${props.name}`}>
+        {props.label}
+      </label>
 
       <style jsx>{`
         .RadioGroup label {
