@@ -24,10 +24,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/filter": [
+    "/filter/[id]": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/filter.js"
+      "static/chunks/pages/filter/[id].js"
+    ],
+    "/filter/new": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/filter/new.js"
     ]
   },
   "ampFirstPages": []

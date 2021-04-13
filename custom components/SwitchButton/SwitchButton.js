@@ -1,7 +1,12 @@
 import React from "react";
 import classes from "./SwitchButton.module.css";
 
-const SwitchButton = ({ name, defaultChecked, handleChange }) => {
+const SwitchButton = ({
+  name,
+  defaultChecked,
+  color = "blue",
+  handleChange,
+}) => {
   return (
     <div className="uk-flex-center uk-flex">
       <label>
@@ -10,9 +15,11 @@ const SwitchButton = ({ name, defaultChecked, handleChange }) => {
           defaultChecked={defaultChecked}
           type="checkbox"
           name={name}
-          className={[classes.iosSwitch, classes.blue, classes.tinyswitch].join(
-            " "
-          )}
+          className={[
+            classes.iosSwitch,
+            classes[color],
+            classes.tinyswitch,
+          ].join(" ")}
         />
         <div>
           <div></div>

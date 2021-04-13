@@ -3,6 +3,8 @@ import React, { useContext } from "react";
 
 import dynamic from "next/dynamic";
 import { CollectionContext } from "components/context/Collection";
+import DropConfirmation from "components/Filter/Elements/DropConfirmation";
+
 const Select = dynamic(() => import("react-select"), {
   ssr: false,
 });
@@ -29,9 +31,13 @@ const CollectionSetup = ({
 
   const options = parseOptions();
 
-  const { isLoading, collections = [], selectedCollection } = useContext(
-    CollectionContext
-  );
+  const {
+    isLoading,
+    collections = [],
+    selectedCollection,
+    setShowForm,
+    deleteGroup,
+  } = useContext(CollectionContext);
 
   const parseCollections = () => {
     return collections.reduce((curr, val) => {
@@ -88,6 +94,24 @@ const CollectionSetup = ({
               />
             </div>
           </li>
+
+          {groups?.length ? (
+            <>
+              <li className="divider "></li>
+
+              <li className="uk-background-secondary uk-padding-small">
+                <div className="uk-text-bold white">Add on</div>
+                <div className="uk-margin-small">
+                  <textarea
+                    className="uk-textarea"
+                    rows="5"
+                    placeholder=""
+                    style={{ resize: "none" }}></textarea>
+                </div>
+              </li>
+            </>
+          ) : null}
+
           <li className="divider "></li>
 
           <li className="uk-background-secondary uk-padding-small">
@@ -107,19 +131,35 @@ const CollectionSetup = ({
               </a>
             </div>
           </li>
+
           {groups.map(({ name, element }, idx) => {
             return (
               <React.Fragment key={`group-${idx}`}>
-                <li
-                  className="uk-background-secondary uk-padding-small tm-cursor-pointer"
-                  uk-toggle="#offcanvas-usage"
-                  onClick={() => {
-                    setActiveGroup(groups[idx]);
-                    setActiveGroupIdx(idx);
-                  }}>
-                  <strong className="uk-text-capitalize uk-text-truncate tm-text-white uk-margin-small-right">
-                    {name || "Not specified"}
-                  </strong>
+                <li className="uk-background-secondary uk-padding-small">
+                  <div
+                    className="uk-grid-small uk-child-width-expand  uk-flex uk-flex-middle uk-flex-between"
+                    uk-grid="">
+                    <strong
+                      type="button"
+                      className="uk-text-capitalize tm-cursor-pointer uk-text-truncate tm-text-white uk-margin-small-right"
+                      uk-toggle="#offcanvas-usage"
+                      onClick={() => {
+                        setActiveGroup(groups[idx]);
+                        setShowForm(true);
+                        setActiveGroupIdx(idx);
+                      }}>
+                      {name || "Not specified"}
+                    </strong>
+                    <div className="font-icon uk-text-middle uk-text-right uk-width-auto">
+                      <span
+                        className="fa-stack fa-lg uk-button uk-button-link"
+                        type="button">
+                        <i className="fa fa-circle fa-lg fa-stack-1x uk-text-danger "></i>
+                        <i className="fa fa-trash fa-stack-1x fa-inverse font-18"></i>
+                      </span>
+                      <DropConfirmation initDelete={() => deleteGroup(idx)} />
+                    </div>
+                  </div>
                 </li>
                 <li className="divider "></li>
               </React.Fragment>

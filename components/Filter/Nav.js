@@ -1,6 +1,14 @@
 import React from "react";
 
-const Nav = () => {
+const steps = [
+  "Select site",
+  "Create Filter",
+  "Add Filter elements",
+  "Set-up in designer",
+  "Test",
+];
+
+const Nav = ({ step, setstep }) => {
   return (
     <>
       <div className="uk-background-secondary">
@@ -10,51 +18,39 @@ const Nav = () => {
               Set-up filter
             </div>
           </li>
-          <li className="uk-background-secondary uk-padding-small">
-            <div className="uk-link-text" style={{ cursor: "pointer" }}>
-              <div className=" uk-flex uk-flex-between ">
-                <div className="">
-                  <div className="uk-text-capitalize uk-text-bold uk-text-truncate tm-text-white">
-                    1. Select Collection
-                  </div>
-                </div>
-                <div className="">
-                  <ProgressIcon status="success" />
-                </div>
-              </div>
-            </div>
-          </li>
+          {steps.map((val, i) => {
+            const curr = i + 1;
 
-          <li className="divider uk-margin-remove"></li>
-          <li className="uk-background-secondary uk-padding-small">
-            <div className="uk-link-text" style={{ cursor: "pointer" }}>
-              <div className=" uk-flex uk-flex-between ">
-                <div className="uk-width-expand@m">
-                  <div className="uk-text-capitalize uk-text-bold uk-text-truncate tm-text-white uk-text-middle">
-                    2. Create Filter
+            return (
+              <React.Fragment key={i + "filter-step"}>
+                <li
+                  className="uk-background-secondary uk-padding-small"
+                  onClick={() => setstep(curr)}>
+                  <div className="uk-link-text" style={{ cursor: "pointer" }}>
+                    <div className=" uk-flex uk-flex-between ">
+                      <div className="">
+                        <div className="uk-text-capitalize uk-text-bold uk-text-truncate tm-text-white">
+                          {1 + i}. {val}
+                        </div>
+                      </div>
+                      <div className="">
+                        <ProgressIcon
+                          status={
+                            curr < step
+                              ? "success"
+                              : step == curr
+                              ? "active"
+                              : "idle"
+                          }
+                        />
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <ProgressIcon status="active" />
-                </div>
-              </div>
-            </div>
-          </li>
-          <li className="divider uk-margin-remove"></li>
-          <li className="uk-background-secondary uk-padding-small">
-            <div className="uk-link-text" style={{ cursor: "pointer" }}>
-              <div className=" uk-flex uk-flex-between ">
-                <div className="uk-width-expand@m">
-                  <div className="uk-text-capitalize uk-text-bold uk-text-truncate tm-text-white uk-text-medium">
-                    3. Publish and test
-                  </div>
-                </div>
-                <div>
-                  <ProgressIcon />
-                </div>
-              </div>
-            </div>
-          </li>
+                </li>
+                <li className="divider uk-margin-remove"></li>
+              </React.Fragment>
+            );
+          })}
         </ul>
       </div>
 

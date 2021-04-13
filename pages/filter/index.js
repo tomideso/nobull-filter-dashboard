@@ -3,9 +3,9 @@ import Router from "next/router";
 import { useEffect } from "react";
 import Container from "components/Filter/Container.js";
 
-export default function Home({ sites }) {
+export default function Home() {
   useEffect(() => {
-    // Router.push('/login')
+    Router.push("/");
   }, []);
 
   return (
@@ -14,26 +14,7 @@ export default function Home({ sites }) {
         <title>NoBull Filter</title>
       </Head>
 
-      <main>
-        <Container sites={sites} />
-      </main>
+      <main>{/* <Container sites={sites} /> */}</main>
     </div>
   );
-}
-
-export async function getServerSideProps(context) {
-  const res = await fetch(`http://localhost:8000/v1/webflow/sites`);
-  const sites = await res.json();
-
-  //  if (!sites) {
-  //   return {
-  //     redirect: {
-  //       destination: '/',
-  //       permanent: false,
-  //     },
-  //   }
-  // }
-  // Pass post data to the page via props
-
-  return { props: { sites } };
 }

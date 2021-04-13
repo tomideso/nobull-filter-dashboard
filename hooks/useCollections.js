@@ -22,6 +22,18 @@ export function useCollectionSchema(collectionId) {
   });
 }
 
+const fetchDomains = (siteID) => {
+  return fetch(
+    "http://localhost:8000/v1/webflow/site-domain/" + siteID
+  ).then((res) => res.json());
+};
+
+export function useSiteDomains(siteID) {
+  return useQuery("sitedomain", () => fetchDomains(siteID), {
+    enabled: !!siteID,
+  });
+}
+
 const fetchItems = (collectionId) => {
   return fetch(
     "http://localhost:8000/v1/webflow/items/" + collectionId

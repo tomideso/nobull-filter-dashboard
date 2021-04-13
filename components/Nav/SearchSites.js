@@ -10,7 +10,7 @@ const SearchSites = (props) => {
           className="uk-grid uk-grid-stack uk-grid-small uk-flex-middle uk-child-width-auto@m uk-margin-left"
           uk-grid="">
           <div>
-            <Link href="/filter">
+            <Link href="/filter/new">
               <a className="uk-link-reset uk-text-bold text-white uk-button uk-button-default uk-button-small ">
                 <span
                   className="uk-icon"

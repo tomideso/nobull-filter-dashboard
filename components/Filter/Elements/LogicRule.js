@@ -7,23 +7,23 @@ import DropConfirmation from "./DropConfirmation";
 import { CollectionContext } from "components/context/Collection";
 
 const LogicRule = ({
-  rules,
   values,
   setValues,
+  setFieldValue,
   errors,
   touched,
-  namePrefix,
   elementIdx,
+  collectionFields,
 }) => {
   const { collection } = useContext(CollectionContext);
 
-  const [joiner, setLogicOperator] = useState("And");
+  const [joiner, setLogicOperator] = useState("&&");
 
   const logic = {
     operator: "contain",
     value: "",
     joiner,
-    field: collection?.fields[0]?.slug,
+    field: collection?.fields?.[0]?.slug,
   };
 
   const emptyGuide = () => {
@@ -33,26 +33,24 @@ const LogicRule = ({
   };
 
   const deleteRule = (idx) => {
-    const elements = [...values.elements];
-    elements[elementIdx].logicRules = elements[elementIdx].logicRules.filter(
-      (v, i) => i != idx
-    );
-    setValues({ ...values, elements });
+    let logicRules = values.logicRules.filter((v, i) => i != idx);
+    setValues({ ...values, logicRules });
   };
 
   const addRule = () => {
-    const elements = [...values.elements];
-    elements[elementIdx].logicRules.push(logic);
-    setValues({ ...values, elements });
+    const logicRules = [...values.logicRules, logic];
+    setValues({ ...values, logicRules });
   };
+
+  const logicRulesError = errors.logicRules && touched.logicRules;
 
   return (
     <div className="uk-card  tm-background-dark">
-      {!!rules.length && (
+      {!!values.logicRules?.length && (
         <>
           <div className="uk-card-header uk-label-muted card-padding  uk-flex uk-flex-middle uk-flex-between">
             <div className="uk-text-bold">Logic rule</div>
-            <div className="font-icon uk-text-middle ">
+            {/* <div className="font-icon uk-text-middle ">
               <span
                 className="fa-stack fa-lg uk-button uk-button-link"
                 type="button">
@@ -60,24 +58,34 @@ const LogicRule = ({
                 <i className="fa fa-trash fa-stack-1x fa-inverse font-18"></i>
               </span>
               <DropConfirmation initDelete={emptyGuide} />
-            </div>
+            </div> */}
           </div>
           <div className="uk-padding-small">
-            {rules.map((val, idx) => {
+            {values.logicRules.map((val, idx) => {
               const Errors =
                 (errors?.logicRules?.length && errors.logicRules[idx]) || {};
               const Touched =
                 (touched?.logicRules?.length && touched.logicRules[idx]) || {};
 
               const hasError = Errors.value && Touched.value;
+              const guideNaming = `logicRules.${idx}.`;
+              const fieldValue = {
+                [guideNaming + "field"]: collection?.fields?.[3]?.slug,
+              };
+
               return (
                 <Guide
-                  key={namePrefix + idx}
+                  key={"logicRules" + idx}
                   deleteHandler={() => deleteRule(idx)}
                   {...val}
                   idx={idx}
                   hasError={hasError}
-                  name={`${namePrefix}logicRules.${idx}.`}
+                  name={guideNaming}
+                  {...fieldValue}
+                  collectionFields={collectionFields}
+                  values={values}
+                  setValues={setValues}
+                  setFieldValue={setFieldValue}
                 />
               );
             })}
@@ -86,17 +94,17 @@ const LogicRule = ({
             <RadioGroup>
               <RadioInput
                 label="&nbsp;And&nbsp;"
-                name={`${namePrefix}-operator`}
+                name={`logic-operator`}
                 value="Male"
-                checked={joiner === "And"}
-                onChange={() => setLogicOperator("And")}
+                checked={joiner === "&&"}
+                onChange={() => setLogicOperator("&&")}
               />
               <RadioInput
                 label="&nbsp;OR&nbsp;"
-                name={`${namePrefix}-operator`}
+                name={`logic-operator`}
                 value="Female"
-                checked={joiner === "Or"}
-                onChange={() => setLogicOperator("Or")}
+                checked={joiner === "||"}
+                onChange={() => setLogicOperator("||")}
               />
             </RadioGroup>
             &nbsp;&nbsp;
@@ -110,12 +118,17 @@ const LogicRule = ({
         </>
       )}
       <div className="uk-card-footer card-padding uk-label-muted">
-        {!!rules.length ? (
+        {!!values?.logicRules?.length ? (
           <span>&nbsp;</span>
         ) : (
           <span
             onClick={addRule}
-            className="uk-button uk-button-small uk-text-capitalize tm-primary uk-text-bold">
+            className={[
+              "uk-button uk-button-small uk-text-capitalize  uk-text-bold",
+              logicRulesError
+                ? "uk-button-danger uk-animation-shake "
+                : "tm-primary",
+            ].join(" ")}>
             <i className="fa fa-plus "></i>
             Add logic rule
           </span>
@@ -142,6 +155,10 @@ const LogicRule = ({
 
         .font-18 {
           font-size: 18px;
+        }
+
+        .tm-border-danger {
+          border: 1px solid #f0506e !important;
         }
 
         .font-icon > span {

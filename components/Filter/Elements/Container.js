@@ -39,7 +39,7 @@ const Container = ({ values, errors, touched, setValues }) => {
         <ul className="uk-accordion" uk-accordion="">
           <FieldArray name="elements">
             {() =>
-              values.elements.map((element, i) => {
+              values.elements?.map((element, i) => {
                 return (
                   <Element
                     key={"element" + i}

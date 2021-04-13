@@ -1,22 +1,48 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import { Field } from "formik";
-import { CollectionContext } from "components/context/Collection";
+// import { CollectionContext } from "components/context/Collection";
+// import { useCollectionSchema } from "hooks/useCollections";
 
-const Guide = ({ deleteHandler, hasError, joiner, name, idx }) => {
-  const { collection } = useContext(CollectionContext);
+const Guide = ({
+  deleteHandler,
+  collectionFields,
+  hasError,
+  joiner,
+  name,
+  idx,
+  values,
+  setValues,
+  setFieldValue,
+}) => {
+  // const { selectedCollection } = useContext(CollectionContext);
 
   const fieldRef = useRef();
 
+  useEffect(() => {
+    if (!values.logicRules[idx]?.field) {
+      setFieldValue(`${name}field`, collectionFields?.[0]?.slug);
+      setFieldValue(`${name}fieldType`, collectionFields?.[0]?.type);
+    }
+  }, []);
+
+  const changeHandler = (evt) => {
+    const field = evt.target.selectedOptions[0].value;
+
+    const fieldType = collectionFields?.find(({ slug }) => slug == field)?.type;
+    setFieldValue(`${name}fieldType`, fieldType);
+    setFieldValue(`${name}field`, field);
+  };
+
   return (
     <div
-      className="uk-width-auto uk-grid uk-grid-stack uk-child-width-auto uk-grid-small"
+      className=" uk-grid uk-grid-stack uk-child-width-auto@m uk-grid-small"
       uk-grid="">
       {idx > 0 && (
         <div>
           <span
             className="uk-text-bold uk-text-small"
             style={{ color: "#FFC600" }}>
-            {joiner}
+            {joiner == "&&" ? "And" : "Or"}
           </span>
         </div>
       )}
@@ -24,11 +50,11 @@ const Guide = ({ deleteHandler, hasError, joiner, name, idx }) => {
         <div>
           <Field
             innerRef={fieldRef}
+            onChange={changeHandler}
             className="uk-select uk-form-small"
             component="select"
-            // defaultValue={collection?.fields[0]?.slug}
             name={`${name}field`}>
-            {collection?.fields?.map(({ _id, slug, name }) => {
+            {collectionFields?.map(({ _id, slug, name }) => {
               return (
                 <option key={_id + name} value={slug}>
                   {name}
@@ -38,6 +64,16 @@ const Guide = ({ deleteHandler, hasError, joiner, name, idx }) => {
           </Field>
         </div>
       </div>
+
+      <Field
+        type="hidden"
+        name={`${name}fieldType`}
+        value={
+          collectionFields?.find(
+            ({ name }) => name == values.logicRules[idx]?.field
+          )?.type
+        }
+      />
 
       <div className="">
         <Field
@@ -66,7 +102,7 @@ const Guide = ({ deleteHandler, hasError, joiner, name, idx }) => {
           placeholder="value"
           name={`${name}value`}
         />
-        <Field type="hidden" name={`${name}joiner`} />
+        <input type="hidden" name={`${name}joiner`} value={collectionFields} />
       </div>
       <div>
         <span

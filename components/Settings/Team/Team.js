@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import SwitchButton from "custom components/SwitchButton/SwitchButton";
+import SwitchButton from "@/custom components/SwitchButton/SwitchButton";
 
 const Team = (props) => {
   return (

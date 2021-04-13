@@ -38,6 +38,7 @@ const MyApp = ({ Component, pageProps, store }) => {
           />
         </Head>
         <Component {...pageProps} />
+
         <script src="/javascript/uikit.min-3.5.9.js"></script>
       </Layout>
     </QueryClientProvider>

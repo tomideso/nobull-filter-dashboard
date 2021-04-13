@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { numberInputHandler } from "utility/helpers";
+// import { numberInputHandler } from "utility/helpers";
 import LogicRule from "./LogicRule";
 import DropConfirmation from "./DropConfirmation";
 import { Field } from "formik";

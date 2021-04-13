@@ -12,6 +12,14 @@ body {
   box-sizing: border-box;
 }
 
+.tm-width-fit{
+    width: fit-content;
+}
+
+.tm-text-primary{
+    color: #1e87f0;
+}
+
 .tm-cursor-pointer{
     cursor: pointer;
 }
@@ -29,7 +37,7 @@ body {
     background-color: transparent;
 }
 
-.tm-primary {
+.tm-primary,.tm-button-primary {
     color: #fff;
     background-color: #1e87f0;
   }
@@ -42,6 +50,10 @@ body {
     background-color: #555 !important;
     color: #eee !important;
 }
+
+.flip-canvas {
+    left: auto;
+  }
 
 .tm-text-small{
     font-size: 15px;
@@ -79,6 +91,10 @@ body {
     border: 1px solid #fff !important;
 }
 
+.tm-border-primary {
+    border: 1px solid #1e87f0 !important;
+  }
+
 .tm-outline-primary{
     border: 1px solid #1e87f0 !important;
     background-color: #fff !important;
@@ -94,6 +110,17 @@ body {
 .pointer-none{
     pointer-events: none;
 }
+
+input[name="trigger"]:checked + label {
+    background: #32d296;
+}
+
+input[name="trigger"] {
+    margin: 4px;
+}
+
+
+
 
 @media (min-width: 960px) {
     .tm-table-stripe>*>tr>*:not(:last-child){

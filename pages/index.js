@@ -1,14 +1,7 @@
 import Head from "next/head";
-import Router from "next/router";
-import { useEffect } from "react";
-// import Main from "components/Home/Main.js";
 import SiteList from "components/Sites/SiteList.js";
 
-export default function Home() {
-  useEffect(() => {
-    // Router.push('/login')
-  }, []);
-
+export default function Home({ filterConfigs }) {
   return (
     <div className="container">
       <Head>
@@ -17,8 +10,24 @@ export default function Home() {
 
       <main>
         {/* <Main /> */}
-        <SiteList />
+        <SiteList filterConfigs={filterConfigs} />
       </main>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const res = await fetch(`/api/v1/config`);
+  const filterConfigs = await res.json();
+
+  //  if (!sites) {
+  //   return {
+  //     redirect: {
+  //       destination: '/',
+  //       permanent: false,
+  //     },
+  //   }
+  // }
+  // Pass post data to the page via props
+  return { props: { filterConfigs } };
 }
