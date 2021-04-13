@@ -14,6 +14,7 @@ import { warningAlert } from "utility/helpers";
 import Setup from "./Designer/Setup";
 import { css } from "@emotion/core";
 import withSpinner from "@/hoc/withSpinner";
+import { BASE_URL } from "@/constant/constant";
 
 const override = css`
   display: block;
@@ -184,7 +185,8 @@ const Container = ({ sites = [], configuration, setShowSpinner }) => {
     const update = { ...config, filters: copy };
 
     setShowSpinner(true);
-    return Axios.put(`http://localhost:8000/v1/config/${savedResult._id}`, {
+
+    return Axios.put(`${BASE_URL}/v1/config/${savedResult._id}`, {
       config: update,
     })
       .then((res) => {
@@ -212,7 +214,7 @@ const Container = ({ sites = [], configuration, setShowSpinner }) => {
 
   function saveConfiguration(settings) {
     setShowSpinner(true);
-    return Axios.post("/api/v1/config/create", {
+    return Axios.post(`${BASE_URL}/v1/config/create`, {
       config: settings || config,
     })
       .then((res) => {
@@ -226,7 +228,7 @@ const Container = ({ sites = [], configuration, setShowSpinner }) => {
 
   function updateConfiguration(settings) {
     setShowSpinner(true);
-    return Axios.put(`/api/v1/config/${savedResult._id}`, {
+    return Axios.put(`${BASE_URL}/v1/config/${savedResult._id}`, {
       config: settings || config,
     })
       .then((res) => {

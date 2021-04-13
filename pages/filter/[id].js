@@ -1,6 +1,7 @@
 import Head from "next/head";
 import SiteContainer from "components/Sites/SiteContainer.js";
 import { useRouter } from "next/router";
+import { BASE_URL } from "@/constant/constant";
 
 export default function Home({ filterConfigs }) {
   const router = useRouter();
@@ -20,7 +21,8 @@ export default function Home({ filterConfigs }) {
 }
 
 export async function getServerSideProps(context) {
-  const res = await fetch(`/api/v1/config`);
+  console.log(BASE_URL);
+  const res = await fetch(`${BASE_URL}/v1/config`);
   const filterConfigs = await res.json();
 
   //  if (!sites) {

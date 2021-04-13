@@ -1,5 +1,6 @@
 import Head from "next/head";
 import SiteList from "components/Sites/SiteList.js";
+import { BASE_URL } from "@/constant/constant";
 
 export default function Home({ filterConfigs }) {
   return (
@@ -17,7 +18,7 @@ export default function Home({ filterConfigs }) {
 }
 
 export async function getServerSideProps(context) {
-  const res = await fetch(`/api/v1/config`);
+  const res = await fetch(`${BASE_URL}/v1/config`);
   const filterConfigs = await res.json();
 
   //  if (!sites) {

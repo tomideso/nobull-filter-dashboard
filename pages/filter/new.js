@@ -2,6 +2,7 @@ import Head from "next/head";
 import Router from "next/router";
 import { useEffect } from "react";
 import Container from "components/Filter/Container.js";
+import { BASE_URL } from "@/constant/constant";
 
 export default function Home({ sites }) {
   useEffect(() => {
@@ -22,7 +23,7 @@ export default function Home({ sites }) {
 }
 
 export async function getServerSideProps(context) {
-  const res = await fetch(`/api/v1/webflow/sites`);
+  const res = await fetch(`${BASE_URL}/v1/webflow/sites`);
   const sites = await res.json();
 
   //  if (!sites) {
