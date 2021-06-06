@@ -9,6 +9,8 @@ const Setup = ({}) => {
     CollectionContext
   );
 
+  console.log(savedResult);
+
   return (
     <>
       <div className="uk-padding-small uk-background-secondary">
@@ -21,7 +23,7 @@ const Setup = ({}) => {
               <div className="uk-padding-small  uk-width-3-4@m tm-border-primary tm-text-white uk-text-small">
                 {`
                   <script src="http://${window.location.host}/libary.js"></script>
-                  <script src="http://${window.location.hostname}:8000/v1/filter/606eaff806a9815667413bd6"></script>
+                  <script src="http://${window.location.hostname}:8000/v1/filter/${savedResult._id}"></script>
                 `}
               </div>
             </div>

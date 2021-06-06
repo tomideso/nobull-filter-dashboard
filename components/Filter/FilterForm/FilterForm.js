@@ -4,6 +4,7 @@ import DropConfirmation from "../Elements/DropConfirmation";
 import * as Yup from "yup";
 import { CollectionContext } from "components/context/Collection";
 import dynamic from "next/dynamic";
+import { useCollectionItems } from "hooks/useCollections";
 
 const Select = dynamic(() => import("react-select"), {
   ssr: false,
@@ -39,6 +40,9 @@ const FilterForm = ({
   const collectionID =
     values.collectionID &&
     collectionOptions.find(({ value }) => value == values.collectionID);
+
+  const collectionItems = useCollectionItems(values.collectionID);
+  // console.log(values.collectionID, JSON.stringify(collectionItems.data));
 
   return (
     <Form>

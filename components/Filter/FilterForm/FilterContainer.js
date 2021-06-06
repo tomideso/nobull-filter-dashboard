@@ -25,7 +25,6 @@ export const FilterContainer = () => {
 
   const [currentFilter, setCurrentFilter] = useState({});
 
-  console.log(step);
   useEffect(() => {
     if (step == 3) {
       showGroupModal();

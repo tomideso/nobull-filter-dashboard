@@ -4,7 +4,7 @@ import Axios from "axios";
 import {
   useCollections,
   // useCollectionSchema,
-  // useCollectionItems,
+  useCollectionItems,
   // useSiteDomains,
 } from "hooks/useCollections";
 import { CollectionContext } from "components/context/Collection";
@@ -12,15 +12,8 @@ import WebflowAuth from "./Auth/WebflowAuth";
 import { FilterContainer } from "./FilterForm/FilterContainer";
 import { warningAlert } from "utility/helpers";
 import Setup from "./Designer/Setup";
-import { css } from "@emotion/core";
 import withSpinner from "@/hoc/withSpinner";
 import { BASE_URL } from "@/constant/constant";
-
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: red;
-`;
 
 const setDefaultSite = (sites = []) => {
   return sites[0]?._id;
@@ -39,7 +32,6 @@ const Container = ({ sites = [], configuration, setShowSpinner }) => {
 
   const [showForm, setShowForm] = useState(true);
 
-  const [imageUrl, setImageUrl] = useState("");
   const [domain, setDomain] = useState("");
   const [selectedSite, setSelectedSite] = useState(
     () => configuration?.siteID || setDefaultSite(sites)
@@ -58,7 +50,6 @@ const Container = ({ sites = [], configuration, setShowSpinner }) => {
   }, [configuration]);
 
   const config = configuration || {
-    imageUrl,
     domain,
     siteID: selectedSite,
     site: sites?.find(({ _id }) => _id == selectedSite),
@@ -112,12 +103,13 @@ const Container = ({ sites = [], configuration, setShowSpinner }) => {
     // });
   };
 
-  const addGroup = ({ name, filterOption }) => {
+  const addGroup = ({ name, filterOption, trigger }) => {
     const groups = filters[activeFilterIdx]?.groups;
 
     const initial = {
       name,
       filterOption,
+      trigger,
       elements: [],
     };
 
@@ -240,7 +232,6 @@ const Container = ({ sites = [], configuration, setShowSpinner }) => {
       });
   }
 
-  // console.log(JSON.stringify({ filters }));
   return (
     <>
       <CollectionContext.Provider

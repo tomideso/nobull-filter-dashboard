@@ -47,6 +47,10 @@ const ElementContainer = ({ activeGroupIdx }) => {
     /(PlainText|Number|Date|Bool)/.test(type)
   );
 
+  const multiRefFields = data?.fields?.filter(({ type }) =>
+    /(ItemRef)/.test(type)
+  );
+
   const filterByAlias =
     activeGroup?.name?.toLowerCase()?.replace(/\s+/g, "-") + "-";
 
@@ -54,10 +58,16 @@ const ElementContainer = ({ activeGroupIdx }) => {
     filterBy == config?.filterBy ? "" : filterBy
   );
 
+  console.log(multiRefFields);
+
+  const trigger = activeGroup?.trigger;
+
+  const showAddBtn = trigger != "CMS Collection Item" ? true : elements?.length;
+
   const addGroup = () => {
     const elementsLength = elements.length;
     const newElement = {
-      trigger: "Static Div, Button, Link",
+      // trigger: "Static Div, Button, Link",
       filterBy: filterByAlias + getRandomNumber(6),
       logicRules: [
         {
@@ -108,8 +118,6 @@ const ElementContainer = ({ activeGroupIdx }) => {
       ...copy[activeFilterIdx],
       filterIndex: activeFilterIdx,
     });
-
-    // setFilters((c) => copy);
   };
 
   return (
@@ -124,21 +132,23 @@ const ElementContainer = ({ activeGroupIdx }) => {
             {/* <Header clickHandler={clickHandler} /> */}
             <li className="uk-padding-small">
               <div className="uk-flex uk-flex-between">
-                <div>
-                  <strong className="uk-text-capitalize uk-text-truncate tm-text-white uk-margin-small-right">
-                    Filter elements
-                  </strong>
+                {showAddBtn ? (
+                  <div>
+                    <strong className="uk-text-capitalize uk-text-truncate tm-text-white uk-margin-small-right">
+                      Filter elements
+                    </strong>
 
-                  <span
-                    className=" uk-text-bold  uk-button tm-primary uk-button-small uk-button-link"
-                    uk-toggle="#logic-offcanvas-usage"
-                    onClick={addGroup}>
                     <span
-                      className="uk-icon"
-                      uk-icon="icon: plus; ratio: .9"></span>
-                    <span> Add</span>
-                  </span>
-                </div>
+                      className=" uk-text-bold  uk-button tm-primary uk-button-small uk-button-link"
+                      uk-toggle="#logic-offcanvas-usage"
+                      onClick={addGroup}>
+                      <span
+                        className="uk-icon"
+                        uk-icon="icon: plus; ratio: .9"></span>
+                      <span> Add</span>
+                    </span>
+                  </div>
+                ) : null}
 
                 <div>
                   {/* <span
@@ -150,7 +160,7 @@ const ElementContainer = ({ activeGroupIdx }) => {
             </li>
             <li className="divider "></li>
 
-            {elements?.map(({ trigger, filterBy }, idx) => (
+            {elements?.map(({ filterBy }, idx) => (
               <React.Fragment key={`element-${idx}`}>
                 <ElementList
                   name={filterBy}
@@ -202,6 +212,7 @@ const ElementContainer = ({ activeGroupIdx }) => {
             setActiveElementIdx={setActiveElementIdx}
             updateElement={updateElement}
             collectionFields={collectionFields}
+            multiRefFields={multiRefFields}
             {...config}
           />
         ) : (
