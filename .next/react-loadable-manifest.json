@@ -1,176 +1,162 @@
 {
-  "./dev/noop": [
+  "components/Settings/Profile/Profile": [
     {
-      "id": "./node_modules/next/dist/client/dev/noop.js",
-      "file": "static/chunks/0.js"
+      "id": "6k2w",
+      "file": "static/chunks/27.77b7c547878729ec0cce.js"
+    },
+    {
+      "id": "iFhr",
+      "file": "static/chunks/27.77b7c547878729ec0cce.js"
+    }
+  ],
+  "components/Settings/Team/Team": [
+    {
+      "id": "",
+      "file": "static/css/146355bb9abe7d91d199.css"
+    },
+    {
+      "id": "PeDF",
+      "file": "static/css/146355bb9abe7d91d199.css"
+    },
+    {
+      "id": "Sp7h",
+      "file": "static/css/146355bb9abe7d91d199.css"
+    },
+    {
+      "id": "a9Yu",
+      "file": "static/css/146355bb9abe7d91d199.css"
+    },
+    {
+      "id": "",
+      "file": "static/chunks/26.533e067ce15495f24502.js"
+    },
+    {
+      "id": "PeDF",
+      "file": "static/chunks/26.533e067ce15495f24502.js"
+    },
+    {
+      "id": "Sp7h",
+      "file": "static/chunks/26.533e067ce15495f24502.js"
+    },
+    {
+      "id": "a9Yu",
+      "file": "static/chunks/26.533e067ce15495f24502.js"
     }
   ],
   "react-select": [
     {
-      "id": "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js",
-      "file": "static/chunks/2.js"
+      "id": "+wdc",
+      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
     },
     {
-      "id": "./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js",
-      "file": "static/chunks/2.js"
+      "id": "0x2o",
+      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
     },
     {
-      "id": "./node_modules/@babel/runtime/helpers/defineProperty.js",
-      "file": "static/chunks/2.js"
+      "id": "16Al",
+      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
     },
     {
-      "id": "./node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js",
-      "file": "static/chunks/2.js"
+      "id": "17x9",
+      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
     },
     {
-      "id": "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js",
-      "file": "static/chunks/2.js"
+      "id": "8L3h",
+      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
     },
     {
-      "id": "./node_modules/@babel/runtime/helpers/esm/createClass.js",
-      "file": "static/chunks/2.js"
+      "id": "QCnb",
+      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
     },
     {
-      "id": "./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js",
-      "file": "static/chunks/2.js"
+      "id": "WbBG",
+      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
     },
     {
-      "id": "./node_modules/@babel/runtime/helpers/esm/inherits.js",
-      "file": "static/chunks/2.js"
+      "id": "f/k9",
+      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
     },
     {
-      "id": "./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js",
-      "file": "static/chunks/2.js"
+      "id": "i8i4",
+      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
     },
     {
-      "id": "./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js",
-      "file": "static/chunks/2.js"
+      "id": "nKUr",
+      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
     },
     {
-      "id": "./node_modules/@babel/runtime/helpers/esm/taggedTemplateLiteral.js",
-      "file": "static/chunks/2.js"
+      "id": "q1tI",
+      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
     },
     {
-      "id": "./node_modules/@babel/runtime/helpers/esm/typeof.js",
-      "file": "static/chunks/2.js"
+      "id": "viRO",
+      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
     },
     {
-      "id": "./node_modules/@babel/runtime/helpers/extends.js",
-      "file": "static/chunks/2.js"
+      "id": "yl30",
+      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
     },
     {
-      "id": "./node_modules/@babel/runtime/helpers/iterableToArray.js",
-      "file": "static/chunks/2.js"
+      "id": "8OQS",
+      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
     },
     {
-      "id": "./node_modules/@babel/runtime/helpers/nonIterableSpread.js",
-      "file": "static/chunks/2.js"
+      "id": "Bnag",
+      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
     },
     {
-      "id": "./node_modules/@babel/runtime/helpers/objectWithoutProperties.js",
-      "file": "static/chunks/2.js"
+      "id": "Cs6D",
+      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
     },
     {
-      "id": "./node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js",
-      "file": "static/chunks/2.js"
+      "id": "EbDI",
+      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
     },
     {
-      "id": "./node_modules/@babel/runtime/helpers/taggedTemplateLiteral.js",
-      "file": "static/chunks/2.js"
+      "id": "FUBA",
+      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
     },
     {
-      "id": "./node_modules/@babel/runtime/helpers/toConsumableArray.js",
-      "file": "static/chunks/2.js"
+      "id": "Ijbi",
+      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
     },
     {
-      "id": "./node_modules/@babel/runtime/helpers/typeof.js",
-      "file": "static/chunks/2.js"
+      "id": "QILm",
+      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
     },
     {
-      "id": "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js",
-      "file": "static/chunks/2.js"
+      "id": "RIqP",
+      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
     },
     {
-      "id": "./node_modules/@emotion/cache/dist/emotion-cache.browser.esm.js",
-      "file": "static/chunks/2.js"
+      "id": "VkAN",
+      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
     },
     {
-      "id": "./node_modules/@emotion/cache/node_modules/stylis/dist/stylis.mjs",
-      "file": "static/chunks/2.js"
+      "id": "WkPL",
+      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
     },
     {
-      "id": "./node_modules/@emotion/memoize/dist/emotion-memoize.browser.esm.js",
-      "file": "static/chunks/2.js"
+      "id": "ZhPi",
+      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
     },
     {
-      "id": "./node_modules/@emotion/react/dist/emotion-element-4fbd89c5.browser.esm.js",
-      "file": "static/chunks/2.js"
+      "id": "cDf5",
+      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
     },
     {
-      "id": "./node_modules/@emotion/react/dist/emotion-react.browser.esm.js",
-      "file": "static/chunks/2.js"
+      "id": "lSNA",
+      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
     },
     {
-      "id": "./node_modules/@emotion/react/isolated-hoist-non-react-statics-do-not-use-this-in-your-code/dist/emotion-react-isolated-hoist-non-react-statics-do-not-use-this-in-your-code.browser.esm.js",
-      "file": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/@emotion/serialize/dist/emotion-serialize.browser.esm.js",
-      "file": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/@emotion/sheet/dist/emotion-sheet.browser.esm.js",
-      "file": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/@emotion/utils/dist/emotion-utils.browser.esm.js",
-      "file": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/memoize-one/dist/memoize-one.esm.js",
-      "file": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/prop-types/checkPropTypes.js",
-      "file": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/prop-types/factoryWithTypeCheckers.js",
-      "file": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/prop-types/index.js",
-      "file": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/prop-types/lib/ReactPropTypesSecret.js",
-      "file": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/react-input-autosize/lib/AutosizeInput.js",
-      "file": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/react-select/dist/Select-d53e3329.browser.esm.js",
-      "file": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/react-select/dist/index-8b64410c.browser.esm.js",
-      "file": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/react-select/dist/react-select.browser.esm.js",
-      "file": "static/chunks/2.js"
-    },
-    {
-      "id": "./node_modules/react-select/dist/stateManager-66a21f68.browser.esm.js",
-      "file": "static/chunks/2.js"
+      "id": "pVnL",
+      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
     }
   ],
   "uikit/dist/js/uikit-icons": [
     {
-      "id": "./node_modules/uikit/dist/js/uikit-icons.js",
-      "file": "static/chunks/1.js"
+      "id": "Jjxz",
+      "file": "static/chunks/28.77ee3775ad4a63be90d8.js"
     }
   ]
 }

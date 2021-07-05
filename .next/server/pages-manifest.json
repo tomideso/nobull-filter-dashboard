@@ -1,7 +1,17 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
+  "/confirmation/email": "pages/confirmation/email.html",
+  "/doctor": "pages/doctor.html",
   "/filter/[id]": "pages/filter/[id].js",
-  "/filter/new": "pages/filter/new.js"
+  "/filter": "pages/filter.html",
+  "/filter/new": "pages/filter/new.js",
+  "/hospital": "pages/hospital.html",
+  "/hospital/preview": "pages/hospital/preview.html",
+  "/": "pages/index.js",
+  "/login": "pages/login.html",
+  "/register": "pages/register.js",
+  "/settings/[tab]": "pages/settings/[tab].html",
+  "/settings": "pages/settings.html",
+  "/_document": "pages/_document.js"
 }

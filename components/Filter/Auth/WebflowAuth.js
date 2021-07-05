@@ -20,9 +20,8 @@ const WebflowAuth = ({ sitesChangeHandler, sites }) => {
     return sites.reduce((curr, val) => {
       const { name: label, previewUrl, shortName, _id } = val;
 
-      curr.push({ label, value: _id });
-      return curr;
-    }, []);
+     return [{ label, value: _id }].concat(curr)
+    }, [{label:"Generate new Auth",value:"add_auth"}]);
   };
 
   const options = parseOptions();

@@ -57,6 +57,10 @@ const Container = ({ sites = [], configuration, setShowSpinner }) => {
   };
 
   const sitesChangeHandler = ({ label, value }) => {
+
+    if(value=="add_auth"){
+       window.location.href="https://accounts.finsweet.com/user/integration/create-integration?redirect_url=nobullapp.com"
+    }
     setSelectedSite(value);
   };
 
