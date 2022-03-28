@@ -42,8 +42,10 @@ export function debounce(callback, wait) {
   };
 }
 
-export const compose = (...functions) => (args) =>
-  functions.reduceRight((arg, fn) => fn(arg), args);
+export const compose =
+  (...functions) =>
+  (args) =>
+    functions.reduceRight((arg, fn) => fn(arg), args);
 
 export const queryString = (obj) =>
   "?" +
@@ -61,7 +63,11 @@ export const warningAlert = ({
   });
 };
 
-export function copyToClipboard(text) {
+export function copyToClipboard(text, element) {
+  if (element) {
+    text = element.textContent;
+  }
+
   if (window.clipboardData && window.clipboardData.setData) {
     // Internet Explorer-specific code path to prevent textarea being shown while dialog is visible.
     return window.clipboardData.setData("Text", text);

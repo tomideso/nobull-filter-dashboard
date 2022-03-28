@@ -4,6 +4,7 @@ import FilterFormFormik from "./FilterForm";
 import { CollectionContext } from "components/context/Collection";
 import GroupContainer from "components/Filter/FilterGroup/GroupContainer";
 import OffCanvasModal from "@/custom components/OffCanvasModal";
+import Link from "next/link";
 
 export const FilterContainer = () => {
   const {
@@ -63,7 +64,8 @@ export const FilterContainer = () => {
     <>
       <section
         className="uk-background-secondary "
-        uk-height-viewport="offset-top: true;offset-bottom: true">
+        uk-height-viewport="offset-top: true;offset-bottom: true"
+      >
         {/* form and list */}
 
         {showForm || !filters.length ? (
@@ -91,19 +93,23 @@ export const FilterContainer = () => {
                       onClick={() => {
                         setShowForm(true);
                         setFormAction("new");
-                      }}>
+                      }}
+                    >
                       <span
                         className="uk-icon"
-                        uk-icon="icon: plus; ratio: .9"></span>
+                        uk-icon="icon: plus; ratio: .9"
+                      ></span>
                       <span> Add Filters</span>
                     </span>
                   </div>
 
                   <div>
-                    <span
-                      onClick={prevStep}
-                      className="uk-link uk-icon"
-                      uk-icon="icon: close;"></span>
+                    <Link href="/filter">
+                      <span
+                        className="uk-link uk-icon"
+                        uk-icon="icon: close;"
+                      ></span>
+                    </Link>
                   </div>
                 </div>
               </li>
@@ -132,7 +138,8 @@ export const FilterContainer = () => {
           close={() => {
             prevStep();
             setShowModalContent(false);
-          }}>
+          }}
+        >
           <GroupContainer activeFilterIdx={activeFilterIdx} />
         </OffCanvasModal>
       </section>

@@ -5,15 +5,15 @@ export function useCollections(siteId) {
 }
 
 const fetchCollections = (siteId) => {
-  return fetch("http://localhost:8000/v1/webflow/site/" + siteId).then((res) =>
-    res.json()
-  );
+  return fetch("http://localhost:8000/v1/webflow/site/" + siteId, {
+    credentials: "include",
+  }).then((res) => res.json());
 };
 
 const fetchCollection = (collectionId) => {
-  return fetch(
-    "http://localhost:8000/v1/webflow/collection/" + collectionId
-  ).then((res) => res.json());
+  return fetch("http://localhost:8000/v1/webflow/collection/" + collectionId, {
+    credentials: "include",
+  }).then((res) => res.json());
 };
 
 export function useCollectionSchema(collectionId) {
@@ -23,9 +23,9 @@ export function useCollectionSchema(collectionId) {
 }
 
 const fetchDomains = (siteID) => {
-  return fetch(
-    "http://localhost:8000/v1/webflow/site-domain/" + siteID
-  ).then((res) => res.json());
+  return fetch("http://localhost:8000/v1/webflow/site-domain/" + siteID, {
+    credentials: "include",
+  }).then((res) => res.json());
 };
 
 export function useSiteDomains(siteID) {
@@ -35,9 +35,9 @@ export function useSiteDomains(siteID) {
 }
 
 const fetchItems = (collectionId) => {
-  return fetch(
-    "http://localhost:8000/v1/webflow/items/" + collectionId
-  ).then((res) => res.json());
+  return fetch("http://localhost:8000/v1/webflow/items/" + collectionId, {
+    credentials: "include",
+  }).then((res) => res.json());
 };
 
 export function useCollectionItems(collectionId) {

@@ -58,29 +58,29 @@ const ElementContainer = ({ activeGroupIdx }) => {
     filterBy == config?.filterBy ? "" : filterBy
   );
 
-  console.log(multiRefFields);
-
   const trigger = activeGroup?.trigger;
 
-  const showAddBtn = trigger != "CMS Collection Item" ? true : elements?.length;
+  const hideAddBtn = trigger == "CMS Collection List" && elements?.length > 0;
 
   const addGroup = () => {
     const elementsLength = elements.length;
     const newElement = {
       // trigger: "Static Div, Button, Link",
       filterBy: filterByAlias + getRandomNumber(6),
-      logicRules: [
-        {
-          operator: "contain",
-          value: "",
-          joiner: "&&",
-          field: collectionFields?.[0]?.slug,
-          fieldType: collectionFields?.[0]?.type,
-        },
-      ],
+      logicRules: [],
     };
 
-    updateElement(newElement, activeGroupIdx, -1);
+    if (trigger != "CMS Collection List") {
+      newElement.logicRules.push({
+        operator: "contain",
+        value: "",
+        joiner: "&&",
+        field: collectionFields?.[0]?.slug,
+        fieldType: collectionFields?.[0]?.type,
+      });
+    }
+
+    // updateElement(newElement, activeGroupIdx, -1);
 
     setActiveElementIdx((e) => elementsLength);
     setShowModalContent((e) => true);
@@ -95,7 +95,7 @@ const ElementContainer = ({ activeGroupIdx }) => {
       // setSavedResult(res);
       setstep(4);
 
-      console.log(JSON.stringify(res));
+      // console.log(JSON.stringify(res));
     });
   };
 
@@ -124,7 +124,8 @@ const ElementContainer = ({ activeGroupIdx }) => {
     <>
       <section
         className="uk-background-secondary "
-        uk-height-viewport="offset-top: true;offset-bottom: true">
+        uk-height-viewport="offset-top: true;offset-bottom: true"
+      >
         {/* form and list */}
         <section></section>
         <section>
@@ -132,7 +133,9 @@ const ElementContainer = ({ activeGroupIdx }) => {
             {/* <Header clickHandler={clickHandler} /> */}
             <li className="uk-padding-small">
               <div className="uk-flex uk-flex-between">
-                {showAddBtn ? (
+                {hideAddBtn ? (
+                  <div>&nbsp;</div>
+                ) : (
                   <div>
                     <strong className="uk-text-capitalize uk-text-truncate tm-text-white uk-margin-small-right">
                       Filter elements
@@ -141,14 +144,16 @@ const ElementContainer = ({ activeGroupIdx }) => {
                     <span
                       className=" uk-text-bold  uk-button tm-primary uk-button-small uk-button-link"
                       uk-toggle="#logic-offcanvas-usage"
-                      onClick={addGroup}>
+                      onClick={addGroup}
+                    >
                       <span
                         className="uk-icon"
-                        uk-icon="icon: plus; ratio: .9"></span>
+                        uk-icon="icon: plus; ratio: .9"
+                      ></span>
                       <span> Add</span>
                     </span>
                   </div>
-                ) : null}
+                )}
 
                 <div>
                   {/* <span
@@ -184,11 +189,13 @@ const ElementContainer = ({ activeGroupIdx }) => {
                 <span
                   className=" uk-text-bold uk-button tm-primary uk-button-small"
                   // uk-toggle="#logic-offcanvas-usage"
-                  onClick={processConfiguration}>
+                  onClick={processConfiguration}
+                >
                   Set-up in designer
                   <span
                     className="uk-icon"
-                    uk-icon="icon: arrow-right; ratio: .9"></span>
+                    uk-icon="icon: arrow-right; ratio: .9"
+                  ></span>
                 </span>
               </div>
             </div>
@@ -201,10 +208,11 @@ const ElementContainer = ({ activeGroupIdx }) => {
         width="uk-width-xlarge@m"
         showContent={showModalContent}
         hideCloseBtn={true}
-        close={() => setShowModalContent(false)}>
-        {config && collectionFields?.length ? (
+        close={() => setShowModalContent(false)}
+      >
+        {collectionFields?.length ? (
           <Config
-            activeGroupIdx={activeFilterIdx}
+            activeGroupIdx={activeGroupIdx}
             close={closeHandler}
             filterByAlias={filterByAlias}
             filterByNames={filterByNames}

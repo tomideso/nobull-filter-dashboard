@@ -13,7 +13,7 @@ const toExclude = [
   "/",
 ].join("|");
 
-const Layout = ({ children, pathname }) => {
+const Layout = ({ children, pathname, session }) => {
   const [hideSideBar, setHideSideBar] = useState(false);
 
   const layoutWidth = hideSideBar ? "0" : "240px";
@@ -36,7 +36,8 @@ const Layout = ({ children, pathname }) => {
       `}</style>
       <div
         className="uk-position-relative  tm-background-black"
-        uk-height-viewport="expand: false">
+        uk-height-viewport="expand: false"
+      >
         <NavBar />
         {/* {!hideSideBar && <SideBar />} */}
         <section className="uk-container-expand pt-60 uk-height-1-1">

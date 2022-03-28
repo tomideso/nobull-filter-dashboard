@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: "nobull-dashboad",
+      name: "nobull-dashboard",
       script: "npm start",
       cwd: ' /home/nobull-dashboard',
       env: {

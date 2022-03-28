@@ -15,6 +15,8 @@ const Config = ({
   filterBy,
   filterByAlias,
   logicRules,
+  collectionItemRefSlug,
+  collectionItemRefID,
   collectionItem,
   filterByNames,
   collectionFields,
@@ -22,11 +24,6 @@ const Config = ({
   activeGroupIdx,
   ...props
 }) => {
-  // const closeHandler = () => {
-  //   close();
-  //   window.UIkit.offcanvas("#logic-offcanvas-usage").hide();
-  // };
-
   const { filters, activeFilterIdx } = useContext(CollectionContext);
 
   const filter = filters[activeFilterIdx];
@@ -34,7 +31,6 @@ const Config = ({
 
   const trigger = group?.trigger;
 
-  // console.log(JSON.stringify(multiRefFields));
   const filterByInputHandler = (evt) => {
     const re = new RegExp("(" + filterByAlias + "[a-z0-9]*)", "ig");
     const value = evt.target.value?.match(re)?.[0];
@@ -46,6 +42,8 @@ const Config = ({
       <Formik
         initialValues={{
           collectionItem: collectionItem || "",
+          collectionItemRefID: collectionItemRefID || "",
+          collectionItemRefSlug: collectionItemRefSlug || "",
           filterBy: filterBy || filterByAlias + getRandomNumber(6),
           filterByAlias: filterByAlias || "",
           logicRules: logicRules || [],
@@ -55,17 +53,16 @@ const Config = ({
         )}
         onSubmit={(values, { resetForm, setSubmitting, setErrors }) => {
           const { filterByNames, ...formValues } = values;
-
           props.updateElement(
             formValues,
-            props.activeGroupIdx,
+            activeGroupIdx,
             props.activeElementIdx
           );
           warningAlert({ message: "configuration saved", status: "success" });
           close();
-        }}>
+        }}
+      >
         {({ values, errors, touched, setValues, setFieldValue }) => {
-          console.log(errors);
           return (
             <Form>
               <div className="uk-padding-small divider">
@@ -76,13 +73,15 @@ const Config = ({
                   <div>
                     <button
                       type="submit"
-                      className="uk-button uk-button-primary uk-text-capitalize  uk-button-small">
+                      className="uk-button uk-button-primary uk-text-capitalize  uk-button-small"
+                    >
                       Save
                     </button>
                     &nbsp;
                     <button
                       type="button"
-                      className="uk-button uk-text-capitalize uk-button-default uk-button-small">
+                      className="uk-button uk-text-capitalize uk-button-default uk-button-small"
+                    >
                       Cancel
                     </button>
                     <DropConfirmation
@@ -107,7 +106,18 @@ const Config = ({
                         </h4>
 
                         <Field
-                          // onChange={changeHandler}
+                          onChange={(e) => {
+                            const value =
+                              e.currentTarget.selectedOptions[0]?.value;
+                            const collectionId = multiRefFields?.find(
+                              ({ slug }) => slug == value
+                            )?.validations?.collectionId;
+                            setValues({
+                              ...values,
+                              collectionItemRefID: collectionId,
+                              collectionItemRefSlug: value,
+                            });
+                          }}
                           id="cms-item"
                           className={[
                             "uk-select",
@@ -116,26 +126,16 @@ const Config = ({
                               : " ",
                           ].join(" ")}
                           component="select"
-                          name="collectionItemRefSlug">
+                          name="collectionItemRefSlug"
+                        >
                           <option value="">Select a collection item</option>
-                          {multiRefFields?.map(
-                            ({ validations, id, slug, name }) => {
-                              return (
-                                <option
-                                  key={id + name}
-                                  value={slug}
-                                  onChange={() => {
-                                    setValues({
-                                      collectionItemRefID:
-                                        validations?.collectionId,
-                                      collectionItemRefSlug: slug,
-                                    });
-                                  }}>
-                                  {name}
-                                </option>
-                              );
-                            }
-                          )}
+                          {multiRefFields?.map(({ id, slug, name }) => {
+                            return (
+                              <option key={id + name} value={slug}>
+                                {name}
+                              </option>
+                            );
+                          })}
                         </Field>
                         <input type="hidden" name="collectionItemRefID" />
                       </div>
@@ -147,7 +147,8 @@ const Config = ({
 
                     <div
                       className="uk-grid-small uk-child-width-expand uk-flex uk-flex-middle"
-                      uk-grid="">
+                      uk-grid=""
+                    >
                       <div className="uk-width-1-4">
                         <span className="uk-form-label uk-text-bold">
                           Name:
@@ -158,11 +159,13 @@ const Config = ({
                           <span>filter-by</span>
                           <span
                             className="uk-background-primary"
-                            onClick={() => copyToClipboard("filterBy")}>
+                            onClick={() => copyToClipboard("filter-by")}
+                          >
                             <span
                               uk-tooltip="copy"
                               className="uk-link uk-icon uk-text-text-top"
-                              uk-icon="icon: copy"></span>
+                              uk-icon="icon: copy"
+                            ></span>
                           </span>
                         </div>
                       </div>
@@ -170,11 +173,13 @@ const Config = ({
 
                     <div
                       className="uk-grid-small uk-child-width-expand uk-flex uk-flex-middle"
-                      uk-grid="">
+                      uk-grid=""
+                    >
                       <div className="uk-width-1-4">
                         <label
                           className="uk-form-label"
-                          htmlFor="form-horizontal-text">
+                          htmlFor="form-horizontal-text"
+                        >
                           Value:
                         </label>
                       </div>
@@ -184,11 +189,13 @@ const Config = ({
                             style={{ zIndex: "2" }}
                             href="#"
                             className="uk-background-primary uk-form-icon uk-form-icon-flip"
-                            onClick={() => copyToClipboard("filterBy")}>
+                            onClick={() => copyToClipboard(values.filterBy)}
+                          >
                             <span
                               uk-tooltip="copy"
                               className="uk-link uk-icon  uk-text-text-top "
-                              uk-icon="icon: copy"></span>
+                              uk-icon="icon: copy"
+                            ></span>
                           </a>
                           <Field
                             onInput={filterByInputHandler}

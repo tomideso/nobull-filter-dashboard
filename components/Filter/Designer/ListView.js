@@ -1,6 +1,9 @@
+import { useCopyToClipboard } from "hooks/useCopyToClipboard";
 import React from "react";
 
 const ListView = ({ label = "Name", value, error }) => {
+  const { copyToClipboard } = useCopyToClipboard();
+
   let classname = "uk-text-muted";
 
   switch (error) {
@@ -22,7 +25,11 @@ const ListView = ({ label = "Name", value, error }) => {
               {" "}
               &nbsp;{value}
             </span>
-            <div className="uk-text-bold uk-button uk-button-primary uk-button-small">
+            <div
+              className="uk-text-bold uk-button uk-button-primary uk-button-small"
+              onClick={(evt) => copyToClipboard(value, evt.target)}
+              uk-tooltip="copy"
+            >
               <span className="uk-icon" uk-icon="icon: copy; ratio: .8"></span>
               <span> Copy</span>
             </div>

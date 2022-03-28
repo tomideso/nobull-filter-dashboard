@@ -37,9 +37,12 @@ const Container = ({ sites = [], configuration, setShowSpinner }) => {
     () => configuration?.siteID || setDefaultSite(sites)
   );
 
-  const { data: collections, error, status, isLoading } = useCollections(
-    selectedSite
-  );
+  const {
+    data: collections,
+    error,
+    status,
+    isLoading,
+  } = useCollections(selectedSite);
 
   useEffect(() => {
     if (configuration?._id) {
@@ -56,10 +59,11 @@ const Container = ({ sites = [], configuration, setShowSpinner }) => {
     filters,
   };
 
+  // console.log(config);
   const sitesChangeHandler = ({ label, value }) => {
-
-    if(value=="add_auth"){
-       window.location.href="https://accounts.finsweet.com/user/integration/create-integration?redirect_url=nobullapp.com"
+    if (value == "add_auth") {
+      window.location.href =
+        "https://accounts.finsweet.com/user/integration/create-integration?redirect_url=nobullapp.com";
     }
     setSelectedSite(value);
   };
@@ -73,17 +77,14 @@ const Container = ({ sites = [], configuration, setShowSpinner }) => {
     const filter = copy[activeFilterIdx];
     const group = filter?.groups[activeGroupIdx];
     const elements = group?.elements;
-    const element = elements[activeElementIdx];
+    const element = elements?.[activeElementIdx];
 
     if (element) {
-      copy[activeFilterIdx].groups[activeGroupIdx].elements[
-        activeElementIdx
-      ] = values;
+      copy[activeFilterIdx].groups[activeGroupIdx].elements[activeElementIdx] =
+        values;
     } else {
       copy[activeFilterIdx]?.groups[activeGroupIdx]?.elements.push(values);
     }
-
-    // setFilters((c) => copy);
     return updateFilter({
       ...copy[activeFilterIdx],
       filterIndex: activeFilterIdx,
@@ -99,12 +100,6 @@ const Container = ({ sites = [], configuration, setShowSpinner }) => {
       ...copy[activeFilterIdx],
       filterIndex: activeFilterIdx,
     });
-
-    // setFilters((filters) => {
-    //   const copy = filters.slice();
-    //   copy[activeFilterIdx].groups = groups.filter((v, i) => i != idx);
-    //   return copy;
-    // });
   };
 
   const addGroup = ({ name, filterOption, trigger }) => {
@@ -132,15 +127,10 @@ const Container = ({ sites = [], configuration, setShowSpinner }) => {
       ...copy[activeFilterIdx],
       filterIndex: activeFilterIdx,
     });
-    // setFilters((filters) => {
-    //   const copy = filters.slice();
-    //   copy[activeFilterIdx]?.groups?.push(initial);
-    //   return copy;
-    // });
   };
 
   const addFilter = ({ collectionID, name }) => {
-    const filter = filters.find((val) => val.name == name);
+    const filter = filters?.find((val) => val.name == name);
 
     if (filter) {
       const message = `Filter with name ${name} already exist`;
@@ -150,7 +140,8 @@ const Container = ({ sites = [], configuration, setShowSpinner }) => {
 
     const update = [{ collectionID, name, groups: [] }, ...filters];
 
-    const updatedConfiguration = { ...config, filters: update };
+    const { _id, ...rest } = config;
+    const updatedConfiguration = { ...rest, filters: update };
 
     return saveConfiguration(updatedConfiguration).then((res) => {
       setFilters(update);
@@ -158,7 +149,7 @@ const Container = ({ sites = [], configuration, setShowSpinner }) => {
   };
 
   const updateFilter = ({ filterIndex, ...filterobj }) => {
-    const copy = filters.slice();
+    const copy = filters?.slice();
 
     const defaultVal = Object.assign({ groups: [] }, filterobj);
 
@@ -167,7 +158,6 @@ const Container = ({ sites = [], configuration, setShowSpinner }) => {
       ...defaultVal,
     };
 
-    console.log("we got here", copy[filterIndex]);
     const update = { ...config, filters: copy };
     return updateConfiguration(update).then((res) => {
       setFilters(copy);
@@ -187,7 +177,7 @@ const Container = ({ sites = [], configuration, setShowSpinner }) => {
     })
       .then((res) => {
         setSavedResult(res.data);
-        setFilters(update);
+        setFilters(copy);
         return res.data;
       })
       .finally((done) => {
@@ -268,7 +258,8 @@ const Container = ({ sites = [], configuration, setShowSpinner }) => {
           updateConfiguration,
           savedResult,
           setSavedResult,
-        }}>
+        }}
+      >
         {configuration ? (
           <>
             {step >= 2 && step < 4 ? (

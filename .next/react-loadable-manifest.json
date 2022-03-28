@@ -1,162 +1,26 @@
 {
-  "components/Settings/Profile/Profile": [
-    {
-      "id": "6k2w",
-      "file": "static/chunks/27.77b7c547878729ec0cce.js"
-    },
-    {
-      "id": "iFhr",
-      "file": "static/chunks/27.77b7c547878729ec0cce.js"
-    }
-  ],
-  "components/Settings/Team/Team": [
-    {
-      "id": "",
-      "file": "static/css/146355bb9abe7d91d199.css"
-    },
-    {
-      "id": "PeDF",
-      "file": "static/css/146355bb9abe7d91d199.css"
-    },
-    {
-      "id": "Sp7h",
-      "file": "static/css/146355bb9abe7d91d199.css"
-    },
-    {
-      "id": "a9Yu",
-      "file": "static/css/146355bb9abe7d91d199.css"
-    },
-    {
-      "id": "",
-      "file": "static/chunks/26.533e067ce15495f24502.js"
-    },
-    {
-      "id": "PeDF",
-      "file": "static/chunks/26.533e067ce15495f24502.js"
-    },
-    {
-      "id": "Sp7h",
-      "file": "static/chunks/26.533e067ce15495f24502.js"
-    },
-    {
-      "id": "a9Yu",
-      "file": "static/chunks/26.533e067ce15495f24502.js"
-    }
-  ],
-  "react-select": [
-    {
-      "id": "+wdc",
-      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
-    },
-    {
-      "id": "0x2o",
-      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
-    },
-    {
-      "id": "16Al",
-      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
-    },
-    {
-      "id": "17x9",
-      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
-    },
-    {
-      "id": "8L3h",
-      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
-    },
-    {
-      "id": "QCnb",
-      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
-    },
-    {
-      "id": "WbBG",
-      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
-    },
-    {
-      "id": "f/k9",
-      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
-    },
-    {
-      "id": "i8i4",
-      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
-    },
-    {
-      "id": "nKUr",
-      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
-    },
-    {
-      "id": "q1tI",
-      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
-    },
-    {
-      "id": "viRO",
-      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
-    },
-    {
-      "id": "yl30",
-      "file": "static/chunks/framework.4fe44a75b82dac5abd7a.js"
-    },
-    {
-      "id": "8OQS",
-      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
-    },
-    {
-      "id": "Bnag",
-      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
-    },
-    {
-      "id": "Cs6D",
-      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
-    },
-    {
-      "id": "EbDI",
-      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
-    },
-    {
-      "id": "FUBA",
-      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
-    },
-    {
-      "id": "Ijbi",
-      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
-    },
-    {
-      "id": "QILm",
-      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
-    },
-    {
-      "id": "RIqP",
-      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
-    },
-    {
-      "id": "VkAN",
-      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
-    },
-    {
-      "id": "WkPL",
-      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
-    },
-    {
-      "id": "ZhPi",
-      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
-    },
-    {
-      "id": "cDf5",
-      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
-    },
-    {
-      "id": "lSNA",
-      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
-    },
-    {
-      "id": "pVnL",
-      "file": "static/chunks/9.258bd5bbd2a099ddd331.js"
-    }
-  ],
-  "uikit/dist/js/uikit-icons": [
-    {
-      "id": "Jjxz",
-      "file": "static/chunks/28.77ee3775ad4a63be90d8.js"
-    }
-  ]
+  "../components/Filter/Auth/WebflowAuth.js -> react-select": {
+    "id": "./node_modules/react-select/dist/react-select.esm.js",
+    "files": [
+      "static/chunks/2.js"
+    ]
+  },
+  "../components/Filter/FilterForm/FilterForm.js -> react-select": {
+    "id": "./node_modules/react-select/dist/react-select.esm.js",
+    "files": [
+      "static/chunks/2.js"
+    ]
+  },
+  "../node_modules/next/dist/client/next-dev.js -> ./dev/noop": {
+    "id": "./node_modules/next/dist/client/dev/noop.js",
+    "files": [
+      "static/chunks/0.js"
+    ]
+  },
+  "_app.js -> uikit/dist/js/uikit-icons": {
+    "id": "./node_modules/uikit/dist/js/uikit-icons.js",
+    "files": [
+      "static/chunks/1.js"
+    ]
+  }
 }

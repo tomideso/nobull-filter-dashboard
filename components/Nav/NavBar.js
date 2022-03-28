@@ -1,42 +1,64 @@
 import React from "react";
 import Link from "next/link";
 import SearchSites from "./SearchSites";
+import { useSession, signIn, signOut } from "next-auth/client";
 
-const NavBar = (props) => {
+const NavBar = () => {
+  const [session, loading] = useSession();
+
+  useSession;
   return (
     <header className="height uk-sticky" uk-sticky="">
       <nav
         className="height uk-flex uk-flex-middle uk-card tm-background-black zIndex uk-navbar"
-        uk-navbar="">
+        uk-navbar=""
+      >
         <div className="uk-navbar-left">
-          <ul className="uk-navbar-nav uk-margin-left">
-            <li className="uk-text-large">
-              <Link href="/">
-                <a className="uk-text-bold tm-text-white uk-text-small uk-text-capitalize uk-text-middle">
-                  <span className="uk-text-bold tm-text-white">Nobull </span>
-                  <span className="logo_padding uk-label-warning uk-margin-small-left uk-text-middle">
-                    <span className="logo_padding uk-button-danger ">
-                      Filter
+          {session?.user?.name ? (
+            <ul className="uk-navbar-nav uk-margin-left">
+              <li className="uk-text-large">
+                <Link href="/">
+                  <a className="uk-text-bold tm-text-white uk-text-small uk-text-capitalize uk-text-middle">
+                    <span className="uk-text-bold tm-text-white">Nobull </span>
+                    <span className="logo_padding uk-label-warning uk-margin-small-left uk-text-middle">
+                      <span className="logo_padding uk-button-danger ">
+                        Filter
+                      </span>
                     </span>
-                  </span>
-                </a>
-              </Link>
-            </li>
-            <li className="button-padding">
-              <div className="search_padding">
-                <SearchSites />
-              </div>
-            </li>
-          </ul>
+                  </a>
+                </Link>
+              </li>
+              <li className="button-padding">
+                <div className="search_padding">
+                  <SearchSites />
+                </div>
+              </li>
+            </ul>
+          ) : null}
         </div>
         <div className="uk-navbar-right">
           <ul className="uk-navbar-nav uk-iconnav">
             <li className="uk-text-large button_padding">
               <Link href="/login">
                 <div>
-                  <a
-                    className="uk-icon-button uk-label-muted uk-icon"
-                    uk-icon="user"></a>
+                  {session?.user?.name ? (
+                    <span className="tm-text-small uk-text-bold tm-text-white">
+                      {session.user.name}{" "}
+                    </span>
+                  ) : null}
+                  {session?.user?.image ? (
+                    <img
+                      src={session?.user?.image}
+                      className="uk-border-circle"
+                      height="50"
+                      width="50"
+                    />
+                  ) : (
+                    <a
+                      className="uk-icon-button uk-label-muted uk-icon"
+                      uk-icon="user"
+                    ></a>
+                  )}
                 </div>
               </Link>
             </li>

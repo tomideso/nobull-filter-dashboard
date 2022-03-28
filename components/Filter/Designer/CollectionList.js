@@ -15,7 +15,8 @@ const CollectionList = () => {
           <div>
             <i
               className="fa fa-question-circle fa-lg tm-cursor-pointer uk-text-primary"
-              aria-hidden="true"></i>
+              aria-hidden="true"
+            ></i>
           </div>
         </div>
 

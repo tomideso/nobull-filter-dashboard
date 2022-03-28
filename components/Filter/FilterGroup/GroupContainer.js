@@ -32,7 +32,8 @@ const GroupContainer = () => {
     <>
       <section
         className="uk-background-secondary "
-        uk-height-viewport="offset-top: true;offset-bottom: true">
+        uk-height-viewport="offset-top: true;offset-bottom: true"
+      >
         {/* form and list */}
 
         {showForm ? (
@@ -52,10 +53,12 @@ const GroupContainer = () => {
 
                     <span
                       className=" uk-text-bold  uk-button tm-text-primary uk-button-small uk-button-link"
-                      onClick={() => setShowForm(true)}>
+                      onClick={() => setShowForm(true)}
+                    >
                       <span
                         className="uk-icon"
-                        uk-icon="icon: plus; ratio: .9"></span>
+                        uk-icon="icon: plus; ratio: .9"
+                      ></span>
                       <span> Add groups</span>
                     </span>
                   </div>
@@ -72,7 +75,8 @@ const GroupContainer = () => {
               <li className="divider "></li>
               {groups?.map(({ collection, name, elements }, idx) => (
                 <React.Fragment
-                  key={`element-${name.replace(" ", "-")}-${idx}`}>
+                  key={`element-${name.replace(" ", "-")}-${idx}`}
+                >
                   <GroupList
                     collection={collection}
                     name={name}
@@ -94,7 +98,8 @@ const GroupContainer = () => {
         id={"group-offcanvas-usage"}
         width="uk-width-3-5@m"
         showContent={showModalContent}
-        close={() => setShowModalContent(false)}>
+        close={() => setShowModalContent(false)}
+      >
         <ElementContainer activeGroupIdx={activeGroupIdx} />
       </OffCanvasModal>
 

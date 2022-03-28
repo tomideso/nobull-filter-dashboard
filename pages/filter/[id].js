@@ -2,6 +2,7 @@ import Head from "next/head";
 import SiteContainer from "components/Sites/SiteContainer.js";
 import { useRouter } from "next/router";
 import { BASE_URL } from "@/constant/constant";
+import axios from "axios";
 
 export default function Home({ filterConfigs }) {
   const router = useRouter();
@@ -20,19 +21,29 @@ export default function Home({ filterConfigs }) {
   );
 }
 
-export async function getServerSideProps(context) {
-  console.log(BASE_URL);
-  const res = await fetch(`${BASE_URL}/v1/config`);
-  const filterConfigs = await res.json();
+export async function getServerSideProps({ req }) {
+  try {
+    const res = await axios.get(`${BASE_URL}/config`, {
+      withCredentials: true,
+      headers: {
+        Cookie: req.headers?.cookie,
+      },
+    });
 
-  //  if (!sites) {
-  //   return {
-  //     redirect: {
-  //       destination: '/',
-  //       permanent: false,
-  //     },
-  //   }
-  // }
+    const filterConfigs = res.data;
+
+    return { props: { filterConfigs } };
+  } catch (error) {
+    console.log("error", error);
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  // return { props: { data } };
+
   // Pass post data to the page via props
-  return { props: { filterConfigs } };
 }

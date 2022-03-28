@@ -18,9 +18,12 @@ const FilterForm = ({
   formAction,
   setFieldValue,
 }) => {
-  const { isLoading, collections = [], filters, activeFilterIdx } = useContext(
-    CollectionContext
-  );
+  const {
+    isLoading,
+    collections = [],
+    filters,
+    activeFilterIdx,
+  } = useContext(CollectionContext);
 
   const parseCollections = () => {
     return collections?.reduce((curr, val) => {
@@ -48,7 +51,8 @@ const FilterForm = ({
     <Form>
       <div
         className="uk-background-secondary"
-        uk-height-viewport="offset-top: true;offset-bottom: true">
+        uk-height-viewport="offset-top: true;offset-bottom: true"
+      >
         <div className="uk-flex uk-flex-between uk-padding-small uk-padding-remove-bottom uk-flex-middle">
           <div className="uk-text-large tm-text-white">
             {formAction == "update" ? "Update Filter" : "New Filter"}
@@ -56,13 +60,15 @@ const FilterForm = ({
           <div>
             <button
               type="submit"
-              className="uk-button uk-button-primary uk-text-capitalize  uk-button-small">
+              className="uk-button uk-button-primary uk-text-capitalize  uk-button-small"
+            >
               Save
             </button>
             &nbsp;
             <button
               type="button"
-              className="uk-button uk-text-capitalize uk-button-danger uk-button-small">
+              className="uk-button uk-text-capitalize uk-button-danger uk-button-small"
+            >
               Cancel
             </button>
             <DropConfirmation
@@ -83,7 +89,8 @@ const FilterForm = ({
                   errors.collectionID && touched.collectionID
                     ? "tm-border-danger uk-animation-shake"
                     : "",
-                ].join(" ")}>
+                ].join(" ")}
+              >
                 <Select
                   name="collectionID"
                   value={collectionID || collectionOptions[0]}
